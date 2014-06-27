@@ -1,10 +1,14 @@
+---
+title: Open Tree of Life on GitHub
+---
+
 #Open Tree of Life
 
-http://opentreeoflife.org
-http://github.com/opentreeoflife
+Main project site: http://opentreeoflife.org
 
-##Repositories in the Open Tree of Life GitHub organization
-OpenTree has many repos. This page describes which repos implement which pieces of the OpenTree infrastructure. The main stack includes:
+Organiation on GitHub: http://github.com/opentreeoflife
+
+##Main stack of Open Tree of Life
 
 * opentree: web application
 * phylesystem and oti: document store and index
@@ -18,7 +22,7 @@ This web page.
 Open Tree of Life web application, including the curator app, at tree.opentreeoflife.org (dev version at devtree.opentreeoflife.org). Written using web2py.  
 
 ###phylesystem
-The top-level repository in the Open Tree of Life phylogenetic study document store. The data are actually stored in different repositories - phylesystem-1, phylesystem-2, etc - which we refer to as ``shards''. This is to future proof against repository size limits in GitHub. 
+The top-level repository in the Open Tree of Life phylogenetic study document store. The data are actually stored in different repositories - phylesystem-1, phylesystem-2, etc - which we refer to as shards. This is to future proof against repository size limits in GitHub. 
 
 ###phylesystem-1
 Contains the NexSON files for the phylogenetic study document store, organized into subdirectories. Each NexSON file represents one study (publication), and may contain more than one tree. 
@@ -30,7 +34,7 @@ Implements synthesis of trees and taxonomy using a neo4j graph database. Written
 The graph database for storage and services for the Open Tree Reference taxonomy. Written in Java.
 
 ###reference-taxonomy
-Code for merging input taxonomies to create the Open Tree of Life reference taxonomy, OTT. We refer to the merging program as `smasher'.
+Code for merging input taxonomies to create the Open Tree of Life reference taxonomy, OTT. We refer to the merging program as smasher.
 
 ###gcmdr
 Scripts for loading data into treemachine. 
