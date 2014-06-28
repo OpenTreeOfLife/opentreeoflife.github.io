@@ -4,9 +4,9 @@ title: Open Tree of Life on GitHub
 
 #Open Tree of Life
 
-Main project site: http://opentreeoflife.org
+Main project site: [http://opentreeoflife.org](http://opentreeoflife.org)
 
-GitHub: http://github.com/opentreeoflife
+GitHub: [http://github.com/opentreeoflife](http://github.com/opentreeoflife)
 
 ##Main stack of Open Tree of Life
 
