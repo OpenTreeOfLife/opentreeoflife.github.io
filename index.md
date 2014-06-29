@@ -1,6 +1,7 @@
 ---
 title: Open Tree of Life on GitHub
 ---
+<link rel="stylesheet" href="{{ site.baseurl }}css/main.css" >
 
 #Open Tree of Life
 
@@ -47,7 +48,7 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 
 * **deployed-systems** : Current (and past) server configuration files for opentree components. Includes information on deployemnt of both development, production and a small test system (based on the clade Asterales).  
 
-* **phylografter** : Phylografter was the Open Tree of Life curation app until being replaced by the 'curator' app within the main web application (code in the opentree repo). Still maintained by Rick Ree, implements methods for tree curation and conflict detection. A web2py application.  
+* **phylografter** : Phylografter was the Open Tree of Life curation app until being replaced by the curator app within the main web application (code in the opentree repo). Still maintained by Rick Ree, implements methods for tree curation and conflict detection. A web2py application.  
 
 * **hackathon** : A repository for the Open Tree of Life hackathon in Ann Arbor in September 2014. Prior to the hackathon, only using issue tracker for discussion of potential hackathon projects. 
 

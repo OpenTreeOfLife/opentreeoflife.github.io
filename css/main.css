@@ -1,0 +1,34 @@
+html {
+    padding: auto;
+    background-color: #f3f3f3;
+}
+body {
+    /* margin: 0; */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 1em 20px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+/* responsive page width (but not too wide) */
+@media (min-width: 768px) {
+    body {
+        width: 724px;
+    }
+}
+@media (max-width: 767px) {
+    body {
+        width: auto;
+    }
+}
+
+h1 {
+    background: url(/images/mini-opentree-logo.png) no-repeat center left;
+    padding: 12px 0 0 28px;
+    height: 32px;
+    margin-bottom: 0px;
+}
