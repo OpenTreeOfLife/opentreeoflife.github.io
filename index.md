@@ -1,6 +1,7 @@
 ---
 title: Open Tree of Life on GitHub
 ---
+<link rel="stylesheet" href="{{ site.baseurl }}css/main.css" >
 
 #Open Tree of Life
 
