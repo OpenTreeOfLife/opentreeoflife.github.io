@@ -4,6 +4,8 @@ title: Open Tree of Life on GitHub
 
 #Open Tree of Life
 
+This page is the README for the Open Tree of Life organization on Github. It should help navigate the many OpenTree repositories.
+
 Main project site: [http://opentreeoflife.org](http://opentreeoflife.org)
 
 GitHub: [http://github.com/opentreeoflife](http://github.com/opentreeoflife)
