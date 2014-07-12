@@ -21,4 +21,4 @@ With these settings, the site will be available at **http://localhost:4001/**
 
 ### Scheduled maintenance page
 
-The page 'maintenance.md' is designed for use during scheduled downtime for any Open Tree website(s). Edit its notice text, being careful to preserve the surrounding `DIV` elements and their assigned CSS classes. Then redirect to its URL (http://opentreeoflife.github.io/maintenance.html) from the intended webserver, using a **302 Temporary** response.
+The page **maintenance.md** is designed for use during scheduled downtime for any Open Tree website(s). Edit its notice text, being careful to preserve the surrounding `DIV` elements and their assigned CSS classes. Then redirect to its URL (http://opentreeoflife.github.io/maintenance.html) from the intended webserver, using a **302 Temporary** response.
