@@ -33,3 +33,14 @@ h1 {
     height: 32px;
     margin-bottom: 0px;
 }
+.maintenance-notice {
+    margin: 30px 40px 20px;
+    color: #900;
+    font-size: 170%;
+    font-weight: bold;
+}
+.maintenance-details {
+    margin: 0px 40px;
+    font-size: 130%;
+    line-height: 1.4em;
+}
