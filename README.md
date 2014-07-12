@@ -13,4 +13,4 @@ Other useful options are `--port` and `--watch` (rebuilds the test site in respo
 
 	$ bundle exec jekyll serve  --port 4001  --watch
 
-With these settings, the site will be available at http://localhost:4001/
+With these settings, the site will be available at **http://localhost:4001/**
