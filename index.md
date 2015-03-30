@@ -44,6 +44,8 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 
 * **[gcmdr](https://github.com/OpenTreeOfLife/gcmdr)** : Scripts for loading data into treemachine. Python.
 
+* **[otcetera](https://github.com/OpenTreeOfLife/otcetera)** : Tree statistics and operations for supertree construction. C++.
+
 * **[ot-base](https://github.com/OpenTreeOfLife/ot-base)** : General Java classes for Open Tree of Life development with Neo4j
 
 * **[deployed-systems](https://github.com/OpenTreeOfLife/deployed-systems)** : Current (and past) server configuration files for opentree components. Includes information on deployemnt of both development, production and a small test system (based on the clade Asterales).  
