@@ -11,6 +11,8 @@ Main project site: [http://opentreeoflife.org](http://opentreeoflife.org)
 
 GitHub: [http://github.com/opentreeoflife](http://github.com/opentreeoflife)
 
+Index to documentation: [https://github.com/OpenTreeOfLife/germinator/wiki](https://github.com/OpenTreeOfLife/germinator/wiki)
+
 ##Main stack of Open Tree of Life
 
 These are the repositories that form the core infrastructure:
@@ -64,7 +66,7 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 
 * **[hbf_phylesystem_test](https://github.com/OpenTreeOfLife/hbf_phylesystem_test)** : Temporary repo of NexSON 1.2.1 to be used for testing the API. 
 
-* **[germinator](https://github.com/OpenTreeOfLife/germinator)** : Deployment scripts that we aren't using yet.
+* **[germinator](https://github.com/OpenTreeOfLife/germinator)** : Deployment scripts, tests, statistics, and documentation.
 
 * **[opentree-testrunner](https://github.com/OpenTreeOfLife/opentree-testrunner)** : Scripts for testing some of the software tools produced by the Open Tree of Life effort. Planning to put more attention here after v 1.0 release. 
 
