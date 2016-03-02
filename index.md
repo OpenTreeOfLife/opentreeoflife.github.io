@@ -59,7 +59,7 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 * **[feedback](https://github.com/OpenTreeOfLife/feedback/issues)** : Used only for the issue tracker; feedback from the opentree web application goes here. 
 
 
-##Repositories in development / for testing only 
+## Repositories in development / for testing only 
 * **[phylesystem-0](https://github.com/OpenTreeOfLife/phylesystem-0)** : Document store for testing. Full size - contains all studies. 
 
 * **[phylesystem_test](https://github.com/OpenTreeOfLife/phylesystem_test)** : Document store for testing. Small size - contains only subset of studies. 
@@ -72,7 +72,7 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 
 * **[taxonomy-stree-json](https://github.com/OpenTreeOfLife/taxonomy-stree-json)** : Code for visualizaing source trees aligned to taxonomies in [Phylografter](https://github.com/OpenTreeOfLife/phylografter)
 
-##Repositories no longer being used / maintained
+## Repositories no longer being used / maintained
 * **[nexson-sandbox](https://github.com/OpenTreeOfLife/nexson-sandbox)** : 
 A set of test NexSON files that we used early in the project. 
 
