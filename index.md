@@ -3,7 +3,7 @@ title: Open Tree of Life on GitHub
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}css/main.css" >
 
-#Open Tree of Life
+# Open Tree of Life
 
 This page is the README for the Open Tree of Life organization on Github. It should help navigate the many OpenTree repositories.
 
@@ -13,7 +13,7 @@ GitHub: [http://github.com/opentreeoflife](http://github.com/opentreeoflife)
 
 Index to documentation: [https://github.com/OpenTreeOfLife/germinator/wiki](https://github.com/OpenTreeOfLife/germinator/wiki)
 
-##Main stack of Open Tree of Life
+## Main stack of Open Tree of Life
 
 These are the repositories that form the core infrastructure:
 
@@ -21,7 +21,7 @@ These are the repositories that form the core infrastructure:
 * **phylesystem, phylesystem-api, oti**: input tree document store, index and APIs
 * **treemachine, taxomachine**: graph databases for trees and taxonomy; implement synthesis methods and APIs
 
-##Deployed repositories
+## Deployed repositories
 
 * **[opentreeoflife.github.io](https://github.com/OpenTreeOfLife/opentreeoflife.github.io)** : This web page.
 
