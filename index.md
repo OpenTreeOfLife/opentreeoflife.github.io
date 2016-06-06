@@ -46,15 +46,11 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 
 * **[taxomachine](https://github.com/OpenTreeOfLife/taxomachine)** : The graph database for storage and services for the Open Tree Reference taxonomy. Written in Java.
 
-* **[gcmdr](https://github.com/OpenTreeOfLife/gcmdr)** : Scripts for loading data into treemachine. Python.
-
 * **[otcetera](https://github.com/OpenTreeOfLife/otcetera)** : Tree statistics and operations for supertree construction. C++.
 
 * **[ot-base](https://github.com/OpenTreeOfLife/ot-base)** : General Java classes for Open Tree of Life development with Neo4j
 
 * **[deployed-systems](https://github.com/OpenTreeOfLife/deployed-systems)** : Current (and past) server configuration files for opentree components. Includes information on deployemnt of both development, production and a small test system (based on the clade Asterales).  
-
-* **[phylografter](https://github.com/OpenTreeOfLife/phylografter)** : Phylografter was the Open Tree of Life curation app until being replaced by the curator app within the main web application (code in the opentree repo). Still maintained by Rick Ree, implements methods for tree curation and conflict detection. A web2py application.  
 
 * **[hackathon](https://github.com/OpenTreeOfLife/hackathon)** : A repository for the Open Tree of Life hackathon in Ann Arbor in September 2014. Prior to the hackathon, only using issue tracker for discussion of potential hackathon projects. 
 
@@ -73,6 +69,10 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 * **[taxonomy-stree-json](https://github.com/OpenTreeOfLife/taxonomy-stree-json)** : Code for visualizaing source trees aligned to taxonomies in [Phylografter](https://github.com/OpenTreeOfLife/phylografter)
 
 ## Repositories no longer being used / maintained
+* **[gcmdr](https://github.com/OpenTreeOfLife/gcmdr)** : Scripts for loading data into treemachine. Python.
+
+* **[phylografter](https://github.com/OpenTreeOfLife/phylografter)** : Phylografter was the Open Tree of Life curation app until being replaced by the curator app within the main web application (code in the opentree repo). Still maintained by Rick Ree, implements methods for tree curation and conflict detection. A web2py application.  
+
 * **[nexson-sandbox](https://github.com/OpenTreeOfLife/nexson-sandbox)** : 
 A set of test NexSON files that we used early in the project. 
 
