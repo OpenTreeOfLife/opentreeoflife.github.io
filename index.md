@@ -25,6 +25,8 @@ These are the repositories that form the core infrastructure:
 
 * **[opentreeoflife.github.io](https://github.com/OpenTreeOfLife/opentreeoflife.github.io)** : This web page.
 
+* **[germinator](https://github.com/OpenTreeOfLife/germinator)** : Deployment scripts, tests, statistics, and documentation; anything to do with system integration.
+
 * **[opentree](https://github.com/OpenTreeOfLife/opentree)** : Open Tree of Life web application at  [tree.opentreeoflife.org](https://tree.opentreeoflife.org) (dev version at devtree.opentreeoflife.org). Includes tree browsing and curator functionality. Written using web2py.  
 
 * **[phylesystem](https://github.com/OpenTreeOfLife/phylesystem)** : The top-level repository in the Open Tree of Life phylogenetic study document store. The data are actually stored in different repositories - phylesystem-1, phylesystem-2, etc - which we refer to as shards. This is to future proof against repository size limits in GitHub. 
@@ -65,8 +67,6 @@ Contains the NexSON files for the phylogenetic study document store, organized i
 * **[phylesystem_test](https://github.com/OpenTreeOfLife/phylesystem_test)** : Document store for testing. Small size - contains only subset of studies. 
 
 * **[hbf_phylesystem_test](https://github.com/OpenTreeOfLife/hbf_phylesystem_test)** : Temporary repo of NexSON 1.2.1 to be used for testing the API. 
-
-* **[germinator](https://github.com/OpenTreeOfLife/germinator)** : Deployment scripts, tests, statistics, and documentation.
 
 * **[opentree-testrunner](https://github.com/OpenTreeOfLife/opentree-testrunner)** : Scripts for testing some of the software tools produced by the Open Tree of Life effort. Planning to put more attention here after v 1.0 release. 
 
