@@ -3,7 +3,7 @@ title: Maintenance - Open Tree of Life
 ---
 <link rel="stylesheet" href="{{ site.baseurl }}css/main.css" >
 
-#Open Tree of Life
+# Open Tree of Life
 
 
 <div class="maintenance-notice">
