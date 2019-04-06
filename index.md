@@ -21,7 +21,7 @@ Open Tree of Life aims to construct a comprehensive, dynamic and digitally-avail
   Interactive exploration of the current taxonomy used by OpenTree.
 
 * *Interact with OpenTree data*: 
-  * R interface: [https://github.com/ropensci/rotl](ROTL)
+  * R interface: [ROTL](https://github.com/ropensci/rotl)
   
 * [Information for developers](developer/developer.html).
 
