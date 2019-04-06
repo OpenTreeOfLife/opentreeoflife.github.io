@@ -1,0 +1,60 @@
+digraph "token0" {
+graph [ranksep=0.25, fontname=Arial,  nodesep=0.25, ranksep=0.5];
+node [fontname=Arial, style=filled, height=0, width=0, shape=box];
+edge [style="setlinewidth(2)"];
+#comment
+
+Features [color="blue", fillcolor="white"]
+
+Fixes [color="red", fillcolor="white"]
+
+Features -> include_incertae_sedis
+Features -> conflict_between_two_trees
+include_incertae_sedis -> incertae_sedis
+
+conflict_between_two_trees -> conflict_handle_higher_taxa
+
+incertae_sedis [label="Incertae sedis", color="green"]
+Features -> include_fossils
+include_fossils -> flag_to_display_extinct
+
+add_more_trees [label="Incorporate more trees", color="magenta",fillcolor="white"]
+
+add_more_trees -> scan_phylesystem_trees
+scan_phylesystem_trees [label="Find phylesystem\ntrees without\ntoo much conflict"]
+scan_phylesystem_trees -> "analyze_conflict.py"
+
+web_api [color="purple", fillcolor="white"]
+web_api -> bulk_node_info
+web_api -> phylo_ref
+web_api -> conflict -> report_multiple_witnesses
+bulk_node_info [color="green"]
+web_api -> report_all_unknown_ids
+report_all_unknown_ids -> report_unknown_ids_mrca
+report_unknown_ids_mrca [color=green]
+report_all_unknown_ids -> report_unknown_ids_induced_subtree
+report_unknown_ids_induced_subtree [color=green]
+web_api -> otcetera_amendments
+web_api -> induced_subtree
+induced_subtree -> broken_taxa_strategies
+web_api -> subtree
+subtree -> flag_to_display_extinct
+subtree -> flag_to_display_incertae_sedis
+
+web_presence -> sites
+web_presence -> status
+web_presence -> google_results
+web_presence -> make_development_visible
+
+sites -> blog
+sites -> "github.io"
+sites -> "tree.opentree.org"
+sites -> education
+
+blog -> remove_ads
+blog -> stop_linking_to_blog
+blog -> forward_blog_to_io
+
+eliminate_neo4j -> tnrs_in_otcetera
+
+}
