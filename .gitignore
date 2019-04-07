@@ -1,3 +1,4 @@
 _site/
 *.lock
 .bundle
+.sass-cache

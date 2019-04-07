@@ -1,9 +1,9 @@
 
 name: "Open Tree of Life"
-description: General information
+description: ""
 
 markdown: kramdown
-avatar: ./images/mini-opentree-logo.png
+avatar: /images/mini-opentree-logo.png
 #
 # Flags below are optional
 #
@@ -19,7 +19,7 @@ footer-links:
   linkedin: 
   pinterest: 
   rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
-  twitter:
+  twitter: opentreeoflife
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
 
 # Your disqus shortname, entering this will enable commenting on posts

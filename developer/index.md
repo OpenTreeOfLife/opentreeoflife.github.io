@@ -1,9 +1,8 @@
 ---
-title: Open Tree of Life: Information for Developers
+layout: page
+title: Information for Developers
+permalink: /developer/
 ---
-<link rel="stylesheet" href="{{ site.baseurl }}/../css/main.css" >
-
-# Open Tree of Life
 
 This page is the README for the Open Tree of Life organization on Github. It should help navigate the many OpenTree repositories.
 
