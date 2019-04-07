@@ -17,4 +17,4 @@ covering some ways to use trees from Open Tree with
     geographic range data from GBIF.
 
 # API Docs
-Our current API is documented at https://github.com/OpenTreeOfLife/germinator/wiki/Open-Tree-of-Life-Web-APIs
+Our current API is documented at [here](https://github.com/OpenTreeOfLife/germinator/wiki/Open-Tree-of-Life-Web-APIs)
