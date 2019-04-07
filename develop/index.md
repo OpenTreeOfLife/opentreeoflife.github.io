@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Information for Developers
-permalink: /developer/
+permalink: /develop
 ---
 
 This page is the README for the Open Tree of Life organization on Github. It should help navigate the many OpenTree repositories.

@@ -10,13 +10,13 @@ permalink: /browse/
 is our interactive tree viewer.
 You can browse by  the synthetic tree and leave feedback.
 
-## Navigation
+### Navigation
 
 Click on nodes to move through the tree.
 If you click the "Legend" button at the top, you will get an explanation
     of what information the visual elements of the tree convey.
 
-## Seeing more info
+### Seeing more info about a node
 
 You can reveal an "Properties panel" by clicking on "ⓘ Show Properties"
     button or the "ⓘ" link that appears when your mouse is over a node or 
@@ -33,8 +33,15 @@ The properities panel contains:
 Clicking on "ⓘ Hide Properties" will hide the panel so that you can see more 
     of the tree.
 
-## Feedack
+### Feedback
 
 If you have feedback about the relationships that you see, use the "Add Comment" button.
+Comments that are entered here are stored as issues in out
+[feedback](https://github.com/OpenTreeOfLife/feedback/issues) repository.
+
 
 # Taxonomy Browser
+
+[https://tree.opentreeoflife.org/taxonomy/browse](https://tree.opentreeoflife.org/taxonomy/browse?id=93302) is our browser for the Open Tree Taxonomy.
+That taxonomy is an input into our full synthetic tree and 
+is used to help us align tips in different trees that refer to the same taxon.
