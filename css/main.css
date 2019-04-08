@@ -145,13 +145,14 @@ nav {
 .boxcontainer {
     margin-top: 30px;
     margin-bottom: 30px;
-    outline: 3px solid white;
+    outline: 1px solid black;
+    outline-color: #000000;
 }
 
 .boxcontainer:hover {
     background-color: #eeeeff;
     color: green;
-    outline-color: #eeeeff;
+    outline: 3px solid  #eeeeff;
 }
 
 
