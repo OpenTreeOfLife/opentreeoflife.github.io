@@ -18,10 +18,12 @@ If you click the "Legend" button at the top, you will get an explanation
 
 ### Seeing more info about a node
 
-You can reveal an "Properties panel" by clicking on "ⓘ Show Properties"
-    button or the "ⓘ" link that appears when your mouse is over a node or 
+You can reveal the "Properties panel" by clicking on "**ⓘ** Show Properties"
+    button or the "**ⓘ**" link that appears when your mouse is over a node or 
     branch in the tree.
+
 The properities panel contains:
+
   * links to the taxon in our reference taxonomy (OTT) and other taxonomies
   * the ID of the node
   * the count of how many tips in the tree descend from the node
@@ -30,7 +32,7 @@ The properities panel contains:
   * information about taxonomies and phylogenies that support or disagree with
     that node.
 
-Clicking on "ⓘ Hide Properties" will hide the panel so that you can see more 
+Clicking on "**ⓘ** Hide Properties" will hide the panel so that you can see more 
     of the tree.
 
 ### Feedback
