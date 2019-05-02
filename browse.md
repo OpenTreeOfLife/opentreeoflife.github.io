@@ -38,8 +38,8 @@ Clicking on "**ⓘ** Hide Properties" will hide the panel so that you can see mo
 ### Feedback
 
 If you have feedback about the relationships that you see, use the "Add Comment" button.
-Comments that are entered here are stored as issues in out
-[feedback](https://github.com/OpenTreeOfLife/feedback/issues) repository.
+Comments that are entered here are stored as issues in our
+[feedback repository](https://github.com/OpenTreeOfLife/feedback/issues).
 
 
 # Taxonomy Browser
