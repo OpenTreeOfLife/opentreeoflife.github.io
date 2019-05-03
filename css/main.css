@@ -45,7 +45,6 @@ h1 {
 }
 
 .wrapper-masthead {
-  margin-bottom: 50px;
 }
 
 .masthead {
@@ -138,24 +137,37 @@ nav {
 }
 
 .boxlink {
+    display: block;
+    overflow: hidden;  /* to prevent collapse */
     text-decoration: none;
     color: black;
 }
 
+.container {
+    clear: both;
+}
 .boxcontainer {
     margin-top: 30px;
     margin-bottom: 30px;
-    outline: 1px solid black;
-    outline-color: #000000;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 0.7em 0.5em;
+    clear: both;
 }
-
 .boxcontainer:hover {
-    background-color: #eeeeff;
+    background-color: #eef;
     color: green;
-    outline: 3px solid  #eeeeff;
+    border: 1px solid #559;
 }
-
-
+.boxcontainer .featured-image {
+    float: left;
+    margin-right: 1em;
+    border-radius: 5px;
+    width: 50%;
+}
+.boxcontainer p {
+    margin: 0;
+}
 
 //
 // .main
