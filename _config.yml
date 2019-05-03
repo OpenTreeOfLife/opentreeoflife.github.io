@@ -1,5 +1,8 @@
 
 name: "Open Tree of Life"
+# Apparently "many plugins and themes expect site.title to be used instead" of site.name
+# ENABLE this if problems appear.
+#title: "Open Tree of Life"
 description: ""
 
 markdown: kramdown
