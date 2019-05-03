@@ -83,9 +83,12 @@ h1 {
   }
 }
 
-.site-name {
+h1.site-name {
+  background: url(/images/mini-opentree-logo.png) no-repeat center left;
+  padding: 12px 0 0 28px;
+  height: 32px;
   margin: 0;
-  color: $darkGray;
+  color: $gray;
   cursor: pointer;
   font-family: $helveticaNeue; 
   font-weight: 300;
