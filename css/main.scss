@@ -22,6 +22,7 @@ body {
     padding: 1em 20px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+    overflow-y: scroll;  /* for consistent page width */
 }
 /* responsive page width (but not too wide) */
 @media (min-width: 768px) {
