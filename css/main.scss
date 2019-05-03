@@ -1,3 +1,9 @@
+---
+# Front matter comment to ensure Jekyll + SASS process this file.
+---
+@import "_variables";
+@import "_highlights";
+
 html {
     padding: auto;
     background-color: #f3f3f3;
@@ -88,12 +94,15 @@ h1.site-name {
   padding: 12px 0 0 28px;
   height: 32px;
   margin: 0;
+}
+h1.site-name a {
   color: $gray;
   cursor: pointer;
   font-family: $helveticaNeue; 
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 1px;
+  text-decoration: none;
 }
 
 .site-description {
