@@ -105,7 +105,7 @@ Everyone who participates in SSB2020 is required to conform to the <a href="http
 <h2 id="notes">Collaborative Notes Document</h2>
 
 <p>
-We will use this <a href="tba">TBA collaborative document</a> for chatting, taking notes, and sharing URLs and bits of code.
+We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collaborative document</a> for chatting, taking notes, and sharing URLs and bits of code. Please sign in!
 </p>
 <hr/>
 
