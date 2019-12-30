@@ -184,6 +184,9 @@ This should open up a browser window that says "jupyter" at the top. If you clic
  <pre>
     > version$version.string
     > install.packages("rotl")
+    > install.packages(c("devtools", "ape", "stringr"))
+    > devtools::install_github("phylotastic/datelife")
+    
  </pre>
 
  Make sure your version is at least 3.6.0 or higher.  The r opentree installation output should end with "* DONE (rotl)" 
