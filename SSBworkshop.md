@@ -118,7 +118,7 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
     <table class="table table-striped">
       <tr> <td>1:30</td>  <td>Intro to OpenTree</td> </tr>
       <tr> <td>1:50</td>  <td>Supertree synthesis</td> </tr>
-      <tr> <td>2:10</td>  <td>Bulk TNRS and induced subtrees in Python</td> </tr>
+      <tr> <td>2:10</td>  <td><a href = "https://github.com/snacktavish/OpenTree_SSB2020">Bulk TNRS, induced subtrees and study search in Python</a></td> </tr>
       <tr> <td>2:45</td>  <td>Coffee break</td> </tr>
       <tr> <td>3:00</td>  <td> <a href = "https://lunasare.github.io/ssb2020_workshop/index.html">Getting synthetic trees and dates in R</a></td> </tr>
       <tr> <td>4:00</td>  <td>Adding trees to OpenTree</td> </tr>
