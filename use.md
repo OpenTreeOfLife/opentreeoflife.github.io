@@ -6,8 +6,12 @@ permalink: /use
 
 # R interface to Open Tree
 
-See [https://github.com/ropensci/rotl](https://github.com/ropensci/rotl)
-for information about R wrappers for interacting with Open Tree's web services.
+See Luna Luisa Sanchez-Reyes' [Open Tree with R tutorial](https://lunasare.github.io/ssb2020_workshop/index.html) for a very nice
+introduction of how to efficiently use the
+ [rotl](https://github.com/ropensci/rotl) package for interacting with Open Tree's web services.
+
+# Tutorial used at SSB 2020
+See <a href="../SSBworkshop">the SSB Workshop page</a>
 
 
 # Integrating Open Tree and GBIF
