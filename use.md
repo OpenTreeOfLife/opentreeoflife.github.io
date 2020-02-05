@@ -8,12 +8,13 @@ permalink: /use
 [SSB 2020](SSBworkshop/)  
 [Berkeley Feb 2020](AWworkshop)
 
-# R interface to Open Tree
-See [https://github.com/ropensci/rotl](https://github.com/ropensci/rotl)
-for information about R wrappers for interacting with Open Tree's web services.
+## Rotl
+See Luna Luisa Sanchez-Reyes' [Open Tree with R tutorial](https://lunasare.github.io/ssb2020_workshop/index.html) for a very nice
+introduction of how to efficiently use the
+ [rotl](https://github.com/ropensci/rotl) package for interacting with Open Tree's web services.
 
 
-# Integrating Open Tree and GBIF
+## Integrating Open Tree and GBIF
 Emily Jane McTavish wrote a tutorial
     [here](https://mctavishlab.github.io/BIO144/labs/rotl-rgbif.html)
 covering some ways to use trees from Open Tree with
