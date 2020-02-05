@@ -1,23 +1,30 @@
 ---
-title: Open Tree SSB2020
+title: Open Tree AmphibiaWeb
 layout: workshop      # DON'T CHANGE THIS.
-venue: "Using the Open Tree of Life for your Research, SSB 2020"        # brief name of host site without address (e.g., "Euphoric State University")
+venue: "Using and Building the Open Tree of Life"        # brief name of host site without address (e.g., "Euphoric State University")
 address: "Hotel Indigo"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 language: "en"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-humandate: "Jan 3, 2020"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
-humantime: "1:30 pm - 5 pm"    # human-readable times for the workshop (e.g., "9:00 am - 4:30 pm")
-instructor: ["Emily Jane McTavish", "Mark Holder", "Luna Luisa Sanchez Reyes"] # boxed, comma-separated list of instructors' names as strings, like ["Kay McNulty", "Betty Jennings", "Betty Snyder"]
+humandate: "Feb 28, 2020"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
+humantime: "12 pm - 4 pm"    # human-readable times for the workshop (e.g., "9:00 am - 4:30 pm")
+instructor: ["Emily Jane McTavish","Luna Luisa Sanchez Reyes"] # boxed, comma-separated list of instructors' names as strings, like ["Kay McNulty", "Betty Jennings", "Betty Snyder"]
 email: ["ejmctavish@ucmerced.edu"]    # boxed, comma-separated list of contact email addresses for the host, lead instructor, or whoever else is handling questions, like ["marlyn.wescoff@example.org", "fran.bilas@example.org", "ruth.lichterman@example.org"]
 collaborative_notes:             # optional: URL for the workshop collaborative notes, e.g. an Etherpad or Google Docs document (e.g., https://pad.carpentries.org/2015-01-01-euphoria)
 eventbrite:           # optional: alphanumeric key for Eventbrite registration, e.g., "1234567890AB" (if Eventbrite is being used)
-permalink: /SSBworkshop/
+permalink: /AWworkshop/
 ---
 
 *We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
 
 
-<h2 id="general">Using the Open Tree of Life for your Research</h2>
+<h2 id="general">Registration</h2>
+
+<strong>[Fill in this survey to register for the workshop](https://ucmerced.az1.qualtrics.com/jfe/form/SV_elKXmtHUgYEa097)</strong>
+There's free lunch!  
+
+
+
+<h2 id="general">Using and Building the Open Tree of Life</h2>
 
 
 The [Open Tree of Life project](http://opentreeoflife.github.io/) is a phylogenetic resource that offers a synthetic tree summarizing evolutionary relationships across 2.6 million taxa. OpenTree (as of September 2019) also provides access to 4,168 published studies comprising 9,367 trees, and the database is growing weekly. The tips of these trees are mapped to taxonomic identifiers that link across taxonomic and informatics databases such as NCBI and The Global Biodiversity Information Facility (GBIF).
@@ -99,7 +106,7 @@ CODE OF CONDUCT
 <h2 id="code-of-conduct">Code of Conduct</h2>
 
 <p>
-Everyone who participates in SSB2020 is required to conform to the <a href="https://systbiol.github.io/ssb2020/code_of_conduct.html">Code of Conduct</a>.
+Everyone who participates is required to conform to the <a href="https://systbiol.github.io/ssb2020/code_of_conduct.html">Code of Conduct</a>.
 </p>
 
 <h2 id="notes">Collaborative Notes Document</h2>
@@ -110,20 +117,20 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
 <hr/>
 
 
-
-<h2 id="schedule">Schedule</h2>
+<h2 id="schedule">Draft Schedule (subject to change based on interest)</h2>
 
 
 <div class="row">
   <div class="col-md-6">
     <table class="table table-striped">
-      <tr> <td>1:30</td>  <td>Intro to OpenTree</td> </tr>
-      <tr> <td>1:50</td>  <td>Supertree synthesis</td> </tr>
-      <tr> <td>2:10</td>  <td><a href = "https://github.com/snacktavish/OpenTree_SSB2020">Bulk TNRS, induced subtrees and study search in Python</a></td> </tr>
-      <tr> <td>2:45</td>  <td>Coffee break</td> </tr>
-      <tr> <td>3:00</td>  <td><a href = "https://lunasare.github.io/ssb2020_workshop/index.html">Getting synthetic trees and dates in R</a></td> </tr>
-      <tr> <td>4:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</td> </tr>
-      <tr> <td>5:00</td>  <td>END</td> </tr>
+    <tr> <td>12:00</td>  <td>Lunch</td> </tr>
+    <tr> <td>12:30</td>  <td>Intro to OpenTree</td> </tr>
+    <tr> <td>12:50</td>  <td>Supertree synthesis</td> </tr>
+    <tr> <td>1:10</td>  <td><a href = "https://github.com/snacktavish/OpenTree_SSB2020">Bulk TNRS, induced subtrees and study search in Python</a></td> </tr>
+    <tr> <td>1:45</td>  <td>Coffee break</td> </tr>
+    <tr> <td>2:00</td>  <td><a href = "https://lunasare.github.io/ssb2020_workshop/index.html">Getting synthetic trees and dates in R</a></td> </tr>
+    <tr> <td>3:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
+    <tr> <td>4:00</td>  <td>END</td> </tr>
     </table>
   </div>
 </div>
