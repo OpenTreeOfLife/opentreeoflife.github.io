@@ -1,5 +1,5 @@
 ---
-title: Open Tree SSB2020
+title: Open Tree AmphibiaWeb
 layout: workshop    # DON'T CHANGE THIS.
 venue: "Using and Building the Open Tree of Life"        # brief name of host site without address (e.g., "Euphoric State University")
 address: "UC Berkeley (exact location TBA)"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
