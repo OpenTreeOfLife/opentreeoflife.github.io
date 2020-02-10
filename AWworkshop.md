@@ -1,8 +1,8 @@
 ---
-title: Open Tree AmphibiaWeb
-layout: workshop      # DON'T CHANGE THIS.
+title: Open Tree SSB2020
+layout: workshop    # DON'T CHANGE THIS.
 venue: "Using and Building the Open Tree of Life"        # brief name of host site without address (e.g., "Euphoric State University")
-address: "UC Berkeley (exact location TBA)      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
+address: "UC Berkeley (exact location TBA)"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 language: "en"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
 humandate: "Feb 28, 2020"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
@@ -17,7 +17,7 @@ permalink: /AWworkshop/
 *We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
 
 
-<h2 id="general">Registration</h2>
+<h2 id="registration">Registration</h2>
 
 <strong>[Fill in this survey to register for the workshop](https://ucmerced.az1.qualtrics.com/jfe/form/SV_elKXmtHUgYEa097)</strong>
 There's free lunch!  
