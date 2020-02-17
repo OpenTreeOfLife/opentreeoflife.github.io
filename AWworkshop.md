@@ -21,6 +21,7 @@ permalink: /AWworkshop/
 
 <strong>[Fill in this survey to register for the workshop](https://ucmerced.az1.qualtrics.com/jfe/form/SV_elKXmtHUgYEa097)</strong>
 There's free lunch!  
+<strong>Registration closes at 5 pm on Friday, Feb 21.</strong>
 
 
 
