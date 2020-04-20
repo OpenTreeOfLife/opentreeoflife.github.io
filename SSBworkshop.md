@@ -110,20 +110,20 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
 <hr/>
 
 
-
-<h2 id="schedule">Schedule</h2>
+<h2 id="schedule">Draft Schedule (subject to change based on interest)</h2>
 
 
 <div class="row">
   <div class="col-md-6">
     <table class="table table-striped">
-      <tr> <td>1:30</td>  <td>Intro to OpenTree</td> </tr>
-      <tr> <td>1:50</td>  <td>Supertree synthesis</td> </tr>
-      <tr> <td>2:10</td>  <td><a href = "https://github.com/snacktavish/OpenTree_SSB2020">Bulk TNRS, induced subtrees and study search in Python</a></td> </tr>
-      <tr> <td>2:45</td>  <td>Coffee break</td> </tr>
-      <tr> <td>3:00</td>  <td><a href = "https://lunasare.github.io/ssb2020_workshop/index.html">Getting synthetic trees and dates in R</a></td> </tr>
-      <tr> <td>4:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</td> </tr>
-      <tr> <td>5:00</td>  <td>END</td> </tr>
+    <tr> <td>12:00</td>  <td>Lunch</td> </tr>
+    <tr> <td>12:30</td>  <td>Intro to OpenTree</td> </tr>
+    <tr> <td>12:50</td>  <td>Supertree synthesis</td> </tr>
+    <tr> <td>1:10</td>  <td><a href = "https://github.com/snacktavish/OpenTree_SSB2020">Bulk TNRS, induced subtrees and study search in Python</a></td> </tr>
+    <tr> <td>1:45</td>  <td>Coffee break</td> </tr>
+    <tr> <td>2:00</td>  <td><a href = "https://lunasare.github.io/ssb2020_workshop/index.html">Getting synthetic trees and dates in R</a></td> </tr>
+    <tr> <td>3:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
+    <tr> <td>4:00</td>  <td>END</td> </tr>
     </table>
   </div>
 </div>
