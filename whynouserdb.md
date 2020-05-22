@@ -4,7 +4,6 @@ title: Why the Open Tree of Life doesn't maintain a database of users
 permalink: /whynouserdb/
 ---
 
-# Why the Open Tree of Life doesn't maintain a database of users
 
 We are a community project, and it is important to give credit
 to the people who did the scientific research and those who
