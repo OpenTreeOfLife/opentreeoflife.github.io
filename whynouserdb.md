@@ -37,10 +37,7 @@ Why did we take this approach?
   And community curation of phylogenetic knowledge is always shared with everyone.
   Specifically:
 
-    * We push user comments to our <a href="https://github.com/OpenTreeOfLife/feedback">feedback repository</a> as soon as they are saved.
-
-    * Curated studies are pushed to <a href="https://github.com/OpenTreeOfLife/phylesystem-1">https://github.com/OpenTreeOfLife/phylesystem-1</a> whenever a user saves a study.
-
-    * Collections of trees go <a href="https://github.com/OpenTreeOfLife/collections-1">https://github.com/OpenTreeOfLife/collections-1</a> whenever they are edited.
-
-    * Taxonomic amendments at <a href="https://github.com/OpenTreeOfLife/amendments-1">https://github.com/OpenTreeOfLife/amendments-1</a> when they are created.
+  * We push user comments to our <a href="https://github.com/OpenTreeOfLife/feedback">feedback repository</a> as soon as they are saved.
+  * Curated studies are pushed to <a href="https://github.com/OpenTreeOfLife/phylesystem-1">https://github.com/OpenTreeOfLife/phylesystem-1</a> whenever a user saves a study.
+  * Collections of trees go <a href="https://github.com/OpenTreeOfLife/collections-1">https://github.com/OpenTreeOfLife/collections-1</a> whenever they are edited.
+  * Taxonomic amendments at <a href="https://github.com/OpenTreeOfLife/amendments-1">https://github.com/OpenTreeOfLife/amendments-1</a> when they are created.
