@@ -11,7 +11,7 @@ cd python-opentree
 virtualenv -p python3 venv-jupyentree  
 source venv-jupyentree/bin/activate  
 pip install -r requirements.txt  
-python setup.py develop  
+python install -e .  
 pip install ipykernel  
 python -m ipykernel install --user --name=opentree  
 pip install jupyter  
