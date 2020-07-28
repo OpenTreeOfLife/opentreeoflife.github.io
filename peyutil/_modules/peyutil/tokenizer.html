@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>peyutil.tokenizer &#8212; peyutil 0.0.2 documentation</title>
+    <link rel="stylesheet" href="../../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">peyutil 0.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../peyutil.html" accesskey="U">peyutil</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">peyutil.tokenizer</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for peyutil.tokenizer</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Newick Tokenization.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span> <span class="nn">.input_output</span> <span class="kn">import</span> <span class="n">read_filepath</span>
+
+<span class="n">_WS</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s+&#39;</span><span class="p">)</span>
+<span class="n">_PUNC</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[(),:;\[\]]&#39;</span><span class="p">)</span>
+<span class="n">_SINGLE_QUOTED_STR</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([^&#39;]*)&#39;&quot;</span><span class="p">)</span>
+<span class="n">_COMMENT_STR</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([^\]]*)\]&quot;</span><span class="p">)</span>
+<span class="n">_UNQUOTED_STR</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([^&#39;():,;</span><span class="se">\\</span><span class="s2">[]+)(?=$|[&#39;():,;</span><span class="se">\\</span><span class="s2">[])&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="NewickTokenType"><a class="viewcode-back" href="../../index.html#peyutil.NewickTokenType">[docs]</a><span class="k">class</span> <span class="nc">NewickTokenType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enum of Newick Token Types.&quot;&quot;&quot;</span>
+    <span class="n">NONE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">OPEN</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">CLOSE</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">COMMA</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">COLON</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">LABEL</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">EDGE_INFO</span> <span class="o">=</span> <span class="mi">6</span>
+    <span class="n">SEMICOLON</span> <span class="o">=</span> <span class="mi">7</span></div>
+
+
+<div class="viewcode-block" id="NewickTokenizer"><a class="viewcode-back" href="../../index.html#peyutil.NewickTokenizer">[docs]</a><span class="k">class</span> <span class="nc">NewickTokenizer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class providing an Newick token iteration interface.</span>
+
+<span class="sd">    Name tokens are stripped of whitespace and comments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">newick</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Newick input as `stream`, a `newick` string, of a `filepath` of __init__.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">stream</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">newick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_src</span> <span class="o">=</span> <span class="n">newick</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">filepath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&quot;stream&quot;, &quot;newick&quot;, or &quot;filepath&quot; must be provided&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_src</span> <span class="o">=</span> <span class="n">read_filepath</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_src</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_ind</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_open_parens</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_close_parens</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">NONE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cb</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;(&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_open_parens</span><span class="p">,</span>
+                    <span class="s1">&#39;)&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_close_parens</span><span class="p">,</span>
+                    <span class="s1">&#39;,&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_comma</span><span class="p">,</span>
+                    <span class="s1">&#39;:&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_colon</span><span class="p">,</span>
+                    <span class="s1">&#39;;&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_semicolon</span><span class="p">,</span>
+                    <span class="s1">&#39;[&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_comment</span><span class="p">,</span>
+                    <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_label</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eat_whitespace_get_next_char</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;Expected the first character to be a &quot;(&quot;, but found &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="c1"># just so we don&#39;t have to check for NONE on every ( we fake a legal preceding token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">OPEN</span>
+
+<div class="viewcode-block" id="NewickTokenizer.tokens"><a class="viewcode-back" href="../../index.html#peyutil.NewickTokenizer.tokens">[docs]</a>    <span class="k">def</span> <span class="nf">tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of remaining tokens (all if not yet iterated over).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">_raise_unexpected</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">!=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+            <span class="c1"># noinspection PyUnresolvedReferences</span>
+            <span class="n">em</span> <span class="o">=</span> <span class="s1">&#39;Error: </span><span class="si">{m}</span><span class="s1"> at </span><span class="si">{f}</span><span class="s1"> after a/an </span><span class="si">{p}</span><span class="s1"> token&#39;</span>
+            <span class="n">em</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_pos</span><span class="p">(),</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">em</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Error: </span><span class="si">{m}</span><span class="s1"> at </span><span class="si">{f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_pos</span><span class="p">()))</span>
+
+<div class="viewcode-block" id="NewickTokenizer.__iter__"><a class="viewcode-back" href="../../index.html#peyutil.NewickTokenizer.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns self as the internal state is used to achieve iteration.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># noinspection PyUnresolvedReferences</span>
+    <span class="k">def</span> <span class="nf">_eat_whitespace</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># if (1 + self._index) &lt;= self._last_ind:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">_WS</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">w</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">_eat_whitespace_get_next_char</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_eat_whitespace</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_char</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_next_char</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">finished</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;Unexpected newick content after the semicolon. Found &quot;</span><span class="si">{c}</span><span class="s1">&quot; and </span><span class="si">{f}</span><span class="s1">&#39;</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_pos</span><span class="p">())</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">x</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_close_parens</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_open_parens</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Number of close parentheses (</span><span class="si">{c}</span><span class="s1">) does not equal &#39;</span>
+                                 <span class="s1">&#39;the number of open parentheses (</span><span class="si">{o}</span><span class="s1">) at the end &#39;</span>
+                                 <span class="s1">&#39;of the input (</span><span class="si">{f}</span><span class="s1">).&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_close_parens</span><span class="p">,</span>
+                                                              <span class="n">o</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_open_parens</span><span class="p">,</span>
+                                                              <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_pos</span><span class="p">()))</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+    <span class="k">def</span> <span class="nf">_peek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_ind</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">[</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_grab_one_single_quoted_word</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">_SINGLE_QUOTED_STR</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="s2">&quot;Found an opening single-quote, but not closing quote&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">word</span>
+
+    <span class="k">def</span> <span class="nf">_read_quoted_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grab_one_single_quoted_word</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peek</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span>
+            <span class="n">word_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span><span class="p">]</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peek</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_char</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&#39;&quot;</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grab_one_single_quoted_word</span><span class="p">()</span>
+                <span class="n">word_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;&#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">label</span>
+
+    <span class="k">def</span> <span class="nf">_read_unquoted_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span>
+        <span class="c1"># called after we grabbed the first letter, so we look one back</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">_UNQUOTED_STR</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="s1">&#39;Expecting a label but found &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">[</span><span class="n">b</span><span class="p">]))</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  <span class="c1"># don&#39;t preserve whitespace</span>
+        <span class="k">return</span> <span class="n">label</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handle_open_parens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">!=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">OPEN</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">!=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="s1">&#39;Expecting &quot;(&quot; to be preceded by &quot;,&quot; or &quot;(&quot;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_open_parens</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">OPEN</span>
+        <span class="k">return</span> <span class="s1">&#39;(&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_handle_colon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">NewickTokenType</span><span class="o">.</span><span class="n">LABEL</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="s1">&#39;Expecting &quot;:&quot; to be preceded by &quot;)&quot; or a taxon label&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">COLON</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_edge_info</span>
+        <span class="k">return</span> <span class="s1">&#39;:&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_handle_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">_COMMENT_STR</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">m</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="n">b</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="s2">&quot;Found an opening [ of a comment, but not closing ]&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_index</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">comment</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_next</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_handle_semicolon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ok_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">NewickTokenType</span><span class="o">.</span><span class="n">LABEL</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">EDGE_INFO</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ok_list</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;Expecting &quot;;&quot; to be preceded by &quot;)&quot;, a taxon label, or branch information&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">finished</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">SEMICOLON</span>
+        <span class="k">return</span> <span class="s1">&#39;;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_handle_comma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ok_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">NewickTokenType</span><span class="o">.</span><span class="n">LABEL</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">EDGE_INFO</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ok_list</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;Expecting &quot;,&quot; to be preceded by &quot;)&quot;, a taxon label, or branch information&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">COMMA</span>
+        <span class="k">return</span> <span class="s1">&#39;,&#39;</span>
+
+<div class="viewcode-block" id="NewickTokenizer.file_pos"><a class="viewcode-back" href="../../index.html#peyutil.NewickTokenizer.file_pos">[docs]</a>    <span class="k">def</span> <span class="nf">file_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a string describing the position within the input stream.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;character #</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_handle_edge_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_quoted_label</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_unquoted_label</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">==</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">COLON</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">EDGE_INFO</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_default_cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_label</span>
+        <span class="k">return</span> <span class="n">label</span>
+
+    <span class="k">def</span> <span class="nf">_handle_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_src</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_index</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_quoted_label</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_unquoted_label</span><span class="p">()</span>
+        <span class="n">ok_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">NewickTokenType</span><span class="o">.</span><span class="n">OPEN</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ok_list</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;Found &quot;</span><span class="si">{}</span><span class="s1">&quot;, but expected a label to be preceded by &quot;(&quot;, &quot;)&quot;, or a comma&#39;</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">LABEL</span>
+        <span class="k">return</span> <span class="n">label</span>
+
+    <span class="k">def</span> <span class="nf">_handle_close_parens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">!=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">LABEL</span> \
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">!=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">EDGE_INFO</span> \
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">!=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;Expecting &quot;)&quot; to be preceded by a label or branch information&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_close_parens</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_close_parens</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_open_parens</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="s1">&#39;Number of close parentheses exceeds the number of open parentheses&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_raise_unexpected</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">=</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">CLOSE</span>
+        <span class="k">return</span> <span class="s1">&#39;)&#39;</span>
+
+<div class="viewcode-block" id="NewickTokenizer.__next__"><a class="viewcode-back" href="../../index.html#peyutil.NewickTokenizer.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Deletes comments from previous tokens, then to the next token.&quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">comments</span><span class="p">[:]</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_next</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">c</span></div>
+
+    <span class="k">def</span> <span class="nf">_read_next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eat_whitespace_get_next_char</span><span class="p">()</span>
+        <span class="n">cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cb</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_cb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cb</span><span class="p">()</span>
+
+    <span class="nb">next</span> <span class="o">=</span> <span class="fm">__next__</span></div>
+
+
+<div class="viewcode-block" id="NewickEvents"><a class="viewcode-back" href="../../index.html#peyutil.NewickEvents">[docs]</a><span class="k">class</span> <span class="nc">NewickEvents</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Newick Event types for event-based parsing.&quot;&quot;&quot;</span>
+    <span class="n">OPEN_SUBTREE</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">TIP</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">CLOSE_SUBTREE</span> <span class="o">=</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="NewickEventFactory"><a class="viewcode-back" href="../../index.html#peyutil.NewickEventFactory">[docs]</a><span class="k">class</span> <span class="nc">NewickEventFactory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class providing an Newick event iteration interface.</span>
+
+<span class="sd">    Higher level interface for reading newick strings into</span>
+<span class="sd">    a series of events.</span>
+<span class="sd">    Each event will be a dict with the keys:</span>
+<span class="sd">      *  `&#39;type&#39;`: a facet of the `NewickEvents` Enum, and</span>
+<span class="sd">      * `&#39;comments&#39;`: a list of all comments contained</span>
+
+<span class="sd">    `NewickEvents.TIP` and `NewickEvents.CLOSE_SUBTREE` events can also have</span>
+<span class="sd">    a `label` and/or an `edge_info` string.</span>
+
+<span class="sd">    *NOTE* for the sake of performance, the value of the comments field</span>
+<span class="sd">    may be the same list in different events! So client code should copy</span>
+<span class="sd">    the list if they need a stable copy.</span>
+
+<span class="sd">    You must make a copy of it if you want to process comments later.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">newick</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">event_handler</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Inputs via `tokenizer`, `newick`, or `filepath` of __init__.</span>
+
+<span class="sd">        If `event_handler` is not `None` in __init__, the initializer will iterate</span>
+<span class="sd">        over all events, passing each one to the handler. So no iteration is</span>
+<span class="sd">        needed or supported.</span>
+
+<span class="sd">        If `event_handler` is `None`, the object will be ready for iteration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tokenizer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">newick</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">filepath</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;tokenizer or newick argument must be supplied&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">NewickTokenizer</span><span class="p">(</span><span class="n">newick</span><span class="o">=</span><span class="n">newick</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="n">filepath</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_base_it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tok_stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start_pos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comments_stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_type</span> <span class="o">=</span> <span class="n">NewickEvents</span><span class="o">.</span><span class="n">OPEN_SUBTREE</span>
+        <span class="k">if</span> <span class="n">event_handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">event_handler</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NewickEventFactory.__iter__"><a class="viewcode-back" href="../../index.html#peyutil.NewickEventFactory.__iter__">[docs]</a>    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns self as the internal state is used to achieve iteration.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="c1"># pylint: disable=inconsistent-return-statements</span>
+<div class="viewcode-block" id="NewickEventFactory.__next__"><a class="viewcode-back" href="../../index.html#peyutil.NewickEventFactory.__next__">[docs]</a>    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Deletes comments and returns next event dict.&quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="p">[:]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tok_stack</span><span class="p">:</span>
+            <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tok_stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_comments_stack</span><span class="p">)</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comments_stack</span><span class="p">[:]</span>
+            <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tok_stack</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tok</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_it</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">comments</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">==</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">OPEN</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_prev_type</span> <span class="o">=</span> <span class="n">NewickEvents</span><span class="o">.</span><span class="n">OPEN_SUBTREE</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">NewickEvents</span><span class="o">.</span><span class="n">OPEN_SUBTREE</span><span class="p">,</span>
+                    <span class="s1">&#39;comments&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">==</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">LABEL</span><span class="p">:</span>
+            <span class="c1"># when reading a tip, be greedy about grabbing surrounding comments</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_greedy_token_seq</span><span class="p">(</span><span class="n">tok</span><span class="p">,</span> <span class="n">NewickEvents</span><span class="o">.</span><span class="n">TIP</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">==</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">CLOSE</span><span class="p">:</span>
+            <span class="c1"># when reading a tip, be greedy about grabbing trailing comments</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_greedy_token_seq</span><span class="p">(</span><span class="n">tok</span><span class="p">,</span> <span class="n">NewickEvents</span><span class="o">.</span><span class="n">CLOSE_SUBTREE</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">==</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">COMMA</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">comments</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">==</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">SEMICOLON</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+        <span class="k">assert</span> <span class="kc">False</span>  <span class="c1"># pragma: no cover</span></div>
+
+    <span class="k">def</span> <span class="nf">_greedy_token_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">tok</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_it</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">comments</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="n">NewickEvents</span><span class="o">.</span><span class="n">CLOSE_SUBTREE</span> \
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">prev_token</span> <span class="o">==</span> <span class="n">NewickTokenType</span><span class="o">.</span><span class="n">LABEL</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">tok</span>
+            <span class="n">tok</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_it</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">comments</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">tok</span> <span class="o">==</span> <span class="s1">&#39;:&#39;</span><span class="p">:</span>
+            <span class="n">tok</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_it</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">comments</span><span class="p">)</span>
+            <span class="c1"># assert self._prev_type == NewickTokenType.EDGE_INFO</span>
+            <span class="n">edge_info</span> <span class="o">=</span> <span class="n">tok</span>
+            <span class="n">tok</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_it</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tokenizer</span><span class="o">.</span><span class="n">comments</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">edge_info</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tok_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prev_type</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">t</span><span class="p">,</span>
+                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="n">label</span><span class="p">,</span>
+                <span class="s1">&#39;edge_info&#39;</span><span class="p">:</span> <span class="n">edge_info</span><span class="p">,</span>
+                <span class="s1">&#39;comments&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comments</span><span class="p">}</span>
+
+    <span class="nb">next</span> <span class="o">=</span> <span class="fm">__next__</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div style="text-align: center; padding-top: 20px; padding-bottom: 5px; width: 100%;">
+    <a href="../../index.html"><img src="../../_static/logo.png" /></a>
+</div><div style="clear:both; width: 100%; height:1px;"></div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script><div style="clear:both; width: 100%; height:1px;"></div><div style="clear:both; width: 100%; height:1px;"></div><div style="clear:both; width: 100%; height:1px;"></div>
+    <!-- Documentation -->
+    <!-- div style="border-top: double 1px white; padding-top: 10px;">
+        <h3>Documentation</h3>
+        <ul>
+            <li><a href="../../primer/index.html">The DendroPy Primer</a></li>
+            <li><a href="../../library/index.html">Library API Reference</a></li>
+            <li>
+                <a href="../../schemas/index.html">Schemas</a>
+                <ul>
+                    <li><a href="../../schemas/fasta.html">FASTA</a></li>
+                    <li><a href="../../schemas/newick.html">Newick</a></li>
+                    <li><a href="../../schemas/nexml.html">NeXML</a></li>
+                    <li><a href="../../schemas/nexus.html">Nexus</a></li>
+                    <li><a href="../../schemas/phylip.html">PHYLIP</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="../../programs/index.html">Programs</a>
+                <ul>
+                    <li><a href="../../programs/sumtrees.html">SumTrees</a></li>
+                </ul>
+            </li>
+            <li><a href="../../glossary.html">Glossary and Terminological Reference</a></li>
+            <li><a href="../../changes.html">Change History</a></li>
+        </ul>
+    </div -->
+
+    <!-- Downloads -->
+    <div style="border-top: double 1px white; padding-top: 10px;">
+        <h3>Obtaining</h3>
+        <ul>
+            <li><a target="_blank" href="https://pypi.org/project/peyutil">Install from the PyPI.</a></li>
+            <li><a target="_blank" href="https://github.com/OpenTreeOfLife/peyutil">Clone the git Repository.</a></li>
+        </ul>
+    </div>
+
+    <!-- Discussions -->
+    <div style="border-top: double 1px white; padding-top: 10px; position: relative;">
+        <h3><span style="text-align: left">Discussion</span></h3>
+        <ul>
+            <li><a href="https://gitter.im/OpenTreeOfLife/public">OToL open chat channel on gitter.</a></li>
+            <li><a href="https://github.com/OpenTreeOfLife/peyutil/issues">Browse issues.</a></li>
+            <li><a href="https://github.com/OpenTreeOfLife/peyutil/issues/new/choose">Open an issue.</a></li>
+        </div>
+    </div>
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">peyutil 0.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../peyutil.html" >peyutil</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">peyutil.tokenizer</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020-2020, Open Tree of Life developers.
+    </div>
+  </body>
+</html>

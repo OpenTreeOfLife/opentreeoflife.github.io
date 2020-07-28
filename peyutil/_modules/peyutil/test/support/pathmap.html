@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>peyutil.test.support.pathmap &#8212; peyutil 0.0.2 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">peyutil 0.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../peyutil.html" accesskey="U">peyutil</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">peyutil.test.support.pathmap</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for peyutil.test.support.pathmap</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Path mapping for various test resources.&quot;&quot;&quot;</span>
+<span class="c1">##############################################################################</span>
+<span class="c1">#  Based on DendroPy Phylogenetic Computing Library.</span>
+<span class="c1">#</span>
+<span class="c1">#  Copyright 2010 Jeet Sukumaran and Mark T. Holder.</span>
+<span class="c1">#  All rights reserved.</span>
+<span class="c1">#</span>
+<span class="c1">#  See &quot;LICENSE.txt&quot; for terms and conditions of usage.</span>
+<span class="c1">#</span>
+<span class="c1">#  If you use this work or any portion thereof in published work,</span>
+<span class="c1">#  please cite it as:</span>
+<span class="c1">#</span>
+<span class="c1">#     Sukumaran, J. and M. T. Holder. 2010. DendroPy: a Python library</span>
+<span class="c1">#     for phylogenetic computing. Bioinformatics 26: 1569-1571.</span>
+<span class="c1">#</span>
+<span class="c1">##############################################################################</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">anyjson</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># pylint: disable=attribute-defined-outside-init</span>
+    <span class="kn">import</span> <span class="nn">json</span>
+
+    <span class="k">class</span> <span class="nc">Wrapper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;No-op class.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="n">anyjson</span> <span class="o">=</span> <span class="n">Wrapper</span><span class="p">()</span>
+    <span class="n">anyjson</span><span class="o">.</span><span class="n">loads</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span>
+<span class="kn">import</span> <span class="nn">codecs</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">peyutil</span> <span class="kn">import</span> <span class="n">pretty_timestamp</span><span class="p">,</span> <span class="n">write_as_json</span>
+
+
+<div class="viewcode-block" id="PathMapForTests"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests">[docs]</a><span class="k">class</span> <span class="nc">PathMapForTests</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class with attributes that make it easy to find different types of testing data.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_map_filepath</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Uses the parent directory of `path_map_filepath` to find other testing dirs.&quot;&quot;&quot;</span>
+        <span class="n">support_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path_map_filepath</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">support_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scripts_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_dir</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">pardir</span><span class="p">,</span> <span class="s2">&quot;scripts&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_dir</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests_output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_dir</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests_scratch_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_dir</span><span class="p">,</span> <span class="s2">&quot;scratch&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PathMapForTests.all_files"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.all_files">[docs]</a>    <span class="k">def</span> <span class="nf">all_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a set of filepaths to all test data.&quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+            <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
+                <span class="n">s</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.nexson_obj"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.nexson_obj">[docs]</a>    <span class="k">def</span> <span class="nf">nexson_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a JSON load result from `filename` in the TESTS/data/nexson.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">nexson_file_obj</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
+            <span class="n">fc</span> <span class="o">=</span> <span class="n">fo</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">anyjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.nexson_file_obj"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.nexson_file_obj">[docs]</a>    <span class="k">def</span> <span class="nf">nexson_file_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns readable file object for testing NexSON in `filename`.&quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nexson_source_path</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.shared_test_dir"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.shared_test_dir">[docs]</a>    <span class="k">def</span> <span class="nf">shared_test_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the fullpath to the shared-api-tests dir in the tests.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span><span class="p">,</span> <span class="s2">&quot;shared-api-tests&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.nexson_source_path"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.nexson_source_path">[docs]</a>    <span class="k">def</span> <span class="nf">nexson_source_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the fullpath for testing a NexSON in `filename`.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span><span class="p">,</span> <span class="s2">&quot;nexson&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.nexml_source_path"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.nexml_source_path">[docs]</a>    <span class="k">def</span> <span class="nf">nexml_source_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the fullpath for testing a NeXML in `filename`.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span><span class="p">,</span> <span class="s2">&quot;nexml&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.named_output_stream"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.named_output_stream">[docs]</a>    <span class="k">def</span> <span class="nf">named_output_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">suffix_timestamp</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns writable file stream of the file from a `named_ouput_path call`.&quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">named_output_path</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">suffix_timestamp</span><span class="o">=</span><span class="n">suffix_timestamp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.named_output_path"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.named_output_path">[docs]</a>    <span class="k">def</span> <span class="nf">named_output_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">suffix_timestamp</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a filepath to filename in the testing output dir.</span>
+
+<span class="sd">        If `suffix_timestamp` is True, results of `pretty_timestamp` will</span>
+<span class="sd">        be appended to the filename.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">suffix_timestamp</span><span class="p">:</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">pretty_timestamp</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_output_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_output_dir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_output_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.script_source_path"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.script_source_path">[docs]</a>    <span class="k">def</span> <span class="nf">script_source_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the full path to a `filename` in the package&#39;s scripts dir.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scripts_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.next_unique_scratch_filepath"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.next_unique_scratch_filepath">[docs]</a>    <span class="k">def</span> <span class="nf">next_unique_scratch_filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the full path to a scratch file starting with `fn` in the scratch dir.&quot;&quot;&quot;</span>
+        <span class="n">frag</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_scratch_dir</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_scratch_dir</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_scratch_dir</span><span class="p">):</span>
+                <span class="n">mf</span> <span class="o">=</span> <span class="s1">&#39;Cannot create temp file &quot;</span><span class="si">{f}</span><span class="s1">&quot; because a file &quot;</span><span class="si">{c}</span><span class="s1">&quot; is in the way&#39;</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">frag</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_scratch_dir</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_scratch_dir</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_unique_filepath</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.next_unique_filepath"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.next_unique_filepath">[docs]</a>    <span class="k">def</span> <span class="nf">next_unique_filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Not thread safe! adds numeric suffix to `fp` until the path does not exist.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
+            <span class="n">ind</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">np</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{f}</span><span class="s1">.</span><span class="si">{i:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">fp</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">ind</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">np</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">np</span>
+                <span class="n">ind</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">fp</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.json_source_path"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.json_source_path">[docs]</a>    <span class="k">def</span> <span class="nf">json_source_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the fullpath for testing a JSON in `filename`.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.collection_obj"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.collection_obj">[docs]</a>    <span class="k">def</span> <span class="nf">collection_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a JSON load result from `filename` in the collection test dir.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_file_obj</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
+            <span class="n">fc</span> <span class="o">=</span> <span class="n">fo</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">anyjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.collection_file_obj"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.collection_file_obj">[docs]</a>    <span class="k">def</span> <span class="nf">collection_file_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a readable file object from `collection_source_path` call.&quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_source_path</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.collection_source_path"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.collection_source_path">[docs]</a>    <span class="k">def</span> <span class="nf">collection_source_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a absolute  filepath to `filename` in TESTS/data/colletions dir.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span><span class="p">,</span> <span class="s2">&quot;collections&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.amendment_obj"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.amendment_obj">[docs]</a>    <span class="k">def</span> <span class="nf">amendment_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a JSON load result from `filename` in the amendments test dir.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">amendment_file_obj</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
+            <span class="n">fc</span> <span class="o">=</span> <span class="n">fo</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">anyjson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.amendment_file_obj"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.amendment_file_obj">[docs]</a>    <span class="k">def</span> <span class="nf">amendment_file_obj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a readable file object from `amendment_source_path` call.&quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amendment_source_path</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.amendment_source_path"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.amendment_source_path">[docs]</a>    <span class="k">def</span> <span class="nf">amendment_source_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a absolute  filepath to `filename` in TESTS/data/amendments dir.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tests_data_dir</span><span class="p">,</span> <span class="s2">&quot;amendments&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PathMapForTests.equal_blob_check"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.PathMapForTests.equal_blob_check">[docs]</a>    <span class="k">def</span> <span class="nf">equal_blob_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit_test</span><span class="p">,</span> <span class="n">diff_file_tag</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Trips unit_test failure if `first` != `second` after writing diff files.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">first</span> <span class="o">!=</span> <span class="n">second</span><span class="p">:</span>
+            <span class="c1"># dd = DictDiff.create(first, second)</span>
+            <span class="n">ofn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_unique_scratch_filepath</span><span class="p">(</span><span class="n">diff_file_tag</span> <span class="o">+</span> <span class="s1">&#39;.obtained_rt&#39;</span><span class="p">)</span>
+            <span class="n">efn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_unique_scratch_filepath</span><span class="p">(</span><span class="n">diff_file_tag</span> <span class="o">+</span> <span class="s1">&#39;.expected_rt&#39;</span><span class="p">)</span>
+            <span class="n">write_as_json</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">ofn</span><span class="p">)</span>
+            <span class="n">write_as_json</span><span class="p">(</span><span class="n">second</span><span class="p">,</span> <span class="n">efn</span><span class="p">)</span>
+            <span class="c1"># er = dd.edits_expr()</span>
+            <span class="k">if</span> <span class="n">first</span> <span class="o">!=</span> <span class="n">second</span><span class="p">:</span>
+                <span class="n">m_fmt</span> <span class="o">=</span> <span class="s2">&quot;Conversion failed see files </span><span class="si">{o}</span><span class="s2"> and </span><span class="si">{e}</span><span class="s2">&quot;</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="n">m_fmt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">o</span><span class="o">=</span><span class="n">ofn</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="n">efn</span><span class="p">)</span>
+                <span class="n">unit_test</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="get_test_path_mapper"><a class="viewcode-back" href="../../../../index.html#peyutil.test.support.pathmap.get_test_path_mapper">[docs]</a><span class="k">def</span> <span class="nf">get_test_path_mapper</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Factory for PathMapForTests object for the package.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">PathMapForTests</span><span class="p">(</span><span class="n">path_map_filepath</span><span class="o">=</span><span class="vm">__file__</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div style="text-align: center; padding-top: 20px; padding-bottom: 5px; width: 100%;">
+    <a href="../../../../index.html"><img src="../../../../_static/logo.png" /></a>
+</div><div style="clear:both; width: 100%; height:1px;"></div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script><div style="clear:both; width: 100%; height:1px;"></div><div style="clear:both; width: 100%; height:1px;"></div><div style="clear:both; width: 100%; height:1px;"></div>
+    <!-- Documentation -->
+    <!-- div style="border-top: double 1px white; padding-top: 10px;">
+        <h3>Documentation</h3>
+        <ul>
+            <li><a href="../../../../primer/index.html">The DendroPy Primer</a></li>
+            <li><a href="../../../../library/index.html">Library API Reference</a></li>
+            <li>
+                <a href="../../../../schemas/index.html">Schemas</a>
+                <ul>
+                    <li><a href="../../../../schemas/fasta.html">FASTA</a></li>
+                    <li><a href="../../../../schemas/newick.html">Newick</a></li>
+                    <li><a href="../../../../schemas/nexml.html">NeXML</a></li>
+                    <li><a href="../../../../schemas/nexus.html">Nexus</a></li>
+                    <li><a href="../../../../schemas/phylip.html">PHYLIP</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="../../../../programs/index.html">Programs</a>
+                <ul>
+                    <li><a href="../../../../programs/sumtrees.html">SumTrees</a></li>
+                </ul>
+            </li>
+            <li><a href="../../../../glossary.html">Glossary and Terminological Reference</a></li>
+            <li><a href="../../../../changes.html">Change History</a></li>
+        </ul>
+    </div -->
+
+    <!-- Downloads -->
+    <div style="border-top: double 1px white; padding-top: 10px;">
+        <h3>Obtaining</h3>
+        <ul>
+            <li><a target="_blank" href="https://pypi.org/project/peyutil">Install from the PyPI.</a></li>
+            <li><a target="_blank" href="https://github.com/OpenTreeOfLife/peyutil">Clone the git Repository.</a></li>
+        </ul>
+    </div>
+
+    <!-- Discussions -->
+    <div style="border-top: double 1px white; padding-top: 10px; position: relative;">
+        <h3><span style="text-align: left">Discussion</span></h3>
+        <ul>
+            <li><a href="https://gitter.im/OpenTreeOfLife/public">OToL open chat channel on gitter.</a></li>
+            <li><a href="https://github.com/OpenTreeOfLife/peyutil/issues">Browse issues.</a></li>
+            <li><a href="https://github.com/OpenTreeOfLife/peyutil/issues/new/choose">Open an issue.</a></li>
+        </div>
+    </div>
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">peyutil 0.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../peyutil.html" >peyutil</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">peyutil.test.support.pathmap</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020-2020, Open Tree of Life developers.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>peyutil &#8212; peyutil 0.0.2 documentation</title>
+    <link rel="stylesheet" href="../_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">peyutil 0.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">peyutil</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for peyutil</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;Simple utility functions used by Open Tree python code.</span>
+
+<span class="sd">These function are used by packages that descend from peyotl, but</span>
+<span class="sd">do not depend on any part of peyotl.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.0.2&#39;</span>  <span class="c1"># sync with setup.py</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<div class="viewcode-block" id="any_early_exit"><a class="viewcode-back" href="../index.html#peyutil.any_early_exit">[docs]</a><span class="k">def</span> <span class="nf">any_early_exit</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">predicate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tests each element in iterable by calling predicate(element).</span>
+
+<span class="sd">    Returns True on first True, or False.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="pretty_timestamp"><a class="viewcode-back" href="../index.html#peyutil.pretty_timestamp">[docs]</a><span class="k">def</span> <span class="nf">pretty_timestamp</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;NOT Recommended. Simple time formatter. legacy artifact!</span>
+
+<span class="sd">    Used in peyotl test reporting.</span>
+<span class="sd">    `t` defaults to current time.</span>
+<span class="sd">    If `style` is 0, strftime uses Y-m-d format</span>
+<span class="sd">    If `style` is not 0 and  not a string YmdHMS is the format.</span>
+<span class="sd">    Otherwise it is passed to strftime.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="n">style</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">%H%M%S&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">struct_time</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">style</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="doi2url"><a class="viewcode-back" href="../index.html#peyutil.doi2url">[docs]</a><span class="k">def</span> <span class="nf">doi2url</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Canonicalizes a DOI.</span>
+
+<span class="sd">    Takes a string form of a DOI (raw, http..., or doi:) and returns</span>
+<span class="sd">    a string in the URL form.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">v</span>
+    <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;doi:&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;doi: &#39;</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span>  <span class="c1"># trim &#39;doi: &#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>  <span class="c1"># trim &#39;doi:&#39;</span>
+    <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;10.&#39;</span><span class="p">):</span>  <span class="c1"># it&#39;s a DOI!</span>
+        <span class="k">return</span> <span class="s1">&#39;http://dx.doi.org/&#39;</span> <span class="o">+</span> <span class="n">v</span>
+    <span class="c1"># convert anything else to URL and hope for the best</span>
+    <span class="k">return</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="get_unique_filepath"><a class="viewcode-back" href="../index.html#peyutil.get_unique_filepath">[docs]</a><span class="k">def</span> <span class="nf">get_unique_filepath</span><span class="p">(</span><span class="n">stem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a unique stem# string. NOT thread-safe!</span>
+
+<span class="sd">    Return stems or stem# where # is the smallest</span>
+<span class="sd">    positive integer for which the path does not exist.</span>
+<span class="sd">    useful for temp dirs where the client code wants an</span>
+<span class="sd">    obvious ordering.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">stem</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">stem</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">stem</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fp</span><span class="p">):</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">fp</span> <span class="o">=</span> <span class="n">stem</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fp</span></div>
+
+
+<div class="viewcode-block" id="propinquity_fn_to_study_tree"><a class="viewcode-back" href="../index.html#peyutil.propinquity_fn_to_study_tree">[docs]</a><span class="k">def</span> <span class="nf">propinquity_fn_to_study_tree</span><span class="p">(</span><span class="n">inp_fn</span><span class="p">,</span> <span class="n">strip_extension</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;For internal use only. Parses a filename to study+tree.</span>
+
+<span class="sd">    This should only be called by propinquity - other code should be treating these</span>
+<span class="sd">    filenames (and the keys that are based on them) as opaque strings.</span>
+
+<span class="sd">    Takes a filename (or key if strip_extension is False), returns (study_id, tree_id)</span>
+
+<span class="sd">    propinquity provides a map to look up the study ID and tree ID (and git SHA)</span>
+<span class="sd">    from these strings.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">strip_extension</span><span class="p">:</span>
+        <span class="n">study_tree</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">inp_fn</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># strip extension</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">study_tree</span> <span class="o">=</span> <span class="n">inp_fn</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">study_tree</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Currently we are expecting studyID@treeID.&lt;file extension&gt; format. &#39;</span> \
+              <span class="s1">&#39;Expected exactly 1 @ in the filename. Got &quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">study_tree</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span></div>
+
+
+<span class="c1"># Make the following names visible to client code using &quot;from peyutil import ...&quot;</span>
+<span class="kn">from</span> <span class="nn">.input_output</span> <span class="kn">import</span> <span class="p">(</span><span class="n">download</span><span class="p">,</span>
+                           <span class="n">expand_path</span><span class="p">,</span>
+                           <span class="n">expand_to_abspath</span><span class="p">,</span>
+                           <span class="n">open_for_group_write</span><span class="p">,</span>
+                           <span class="n">parse_study_tree_list</span><span class="p">,</span>
+                           <span class="n">pretty_dict_str</span><span class="p">,</span>
+                           <span class="n">read_as_json</span><span class="p">,</span>
+                           <span class="n">read_filepath</span><span class="p">,</span>
+                           <span class="n">write_to_filepath</span><span class="p">,</span>
+                           <span class="n">write_as_json</span><span class="p">,</span>
+                           <span class="n">write_pretty_dict_str</span><span class="p">,</span> <span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">.str_util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">flush_utf_8_writer</span><span class="p">,</span>
+                       <span class="n">get_utf_8_string_io_writer</span><span class="p">,</span>
+                       <span class="n">increment_slug</span><span class="p">,</span> <span class="n">is_int_type</span><span class="p">,</span> <span class="n">is_str_type</span><span class="p">,</span>
+                       <span class="n">primitive_string_types</span><span class="p">,</span>
+                       <span class="n">reverse_dict</span><span class="p">,</span>
+                       <span class="n">slugify</span><span class="p">,</span> <span class="n">StringIO</span><span class="p">,</span>
+                       <span class="n">underscored2camel_case</span><span class="p">,</span>
+                       <span class="n">UNICODE</span><span class="p">,</span>
+                       <span class="n">urlencode</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">.tokenizer</span> <span class="kn">import</span> <span class="p">(</span><span class="n">NewickEventFactory</span><span class="p">,</span> <span class="n">NewickEvents</span><span class="p">,</span>
+                        <span class="n">NewickTokenizer</span><span class="p">,</span> <span class="n">NewickTokenType</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;input_output&#39;</span><span class="p">,</span> <span class="s1">&#39;str_util&#39;</span><span class="p">,</span> <span class="s1">&#39;dict_wrapper&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="s1">&#39;tokenizer&#39;</span><span class="p">,</span>
+           <span class="c1"># from input_output</span>
+           <span class="s1">&#39;download&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;expand_path&#39;</span><span class="p">,</span> <span class="s1">&#39;expand_to_abspath&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;open_for_group_write&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;parse_study_tree_list&#39;</span><span class="p">,</span> <span class="s1">&#39;pretty_dict_str&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;read_as_json&#39;</span><span class="p">,</span> <span class="s1">&#39;read_filepath&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;write_to_filepath&#39;</span><span class="p">,</span> <span class="s1">&#39;write_as_json&#39;</span><span class="p">,</span> <span class="s1">&#39;write_pretty_dict_str&#39;</span><span class="p">,</span>
+           <span class="c1"># from str_util</span>
+           <span class="s1">&#39;flush_utf_8_writer&#39;</span><span class="p">,</span> <span class="s1">&#39;get_utf_8_string_io_writer&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;increment_slug&#39;</span><span class="p">,</span> <span class="s1">&#39;is_int_type&#39;</span><span class="p">,</span> <span class="s1">&#39;is_str_type&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;primitive_string_types&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;reverse_dict&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;slugify&#39;</span><span class="p">,</span> <span class="s1">&#39;StringIO&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;underscored2camel_case&#39;</span><span class="p">,</span> <span class="s1">&#39;UNICODE&#39;</span><span class="p">,</span> <span class="s1">&#39;urlencode&#39;</span><span class="p">,</span>
+           <span class="c1"># from tokenizer</span>
+           <span class="s1">&#39;NewickEventFactory&#39;</span><span class="p">,</span> <span class="s1">&#39;NewickEvents&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;NewickTokenizer&#39;</span><span class="p">,</span> <span class="s1">&#39;NewickTokenType&#39;</span><span class="p">,</span>
+           <span class="p">]</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div style="text-align: center; padding-top: 20px; padding-bottom: 5px; width: 100%;">
+    <a href="../index.html"><img src="../_static/logo.png" /></a>
+</div><div style="clear:both; width: 100%; height:1px;"></div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script><div style="clear:both; width: 100%; height:1px;"></div><div style="clear:both; width: 100%; height:1px;"></div><div style="clear:both; width: 100%; height:1px;"></div>
+    <!-- Documentation -->
+    <!-- div style="border-top: double 1px white; padding-top: 10px;">
+        <h3>Documentation</h3>
+        <ul>
+            <li><a href="../primer/index.html">The DendroPy Primer</a></li>
+            <li><a href="../library/index.html">Library API Reference</a></li>
+            <li>
+                <a href="../schemas/index.html">Schemas</a>
+                <ul>
+                    <li><a href="../schemas/fasta.html">FASTA</a></li>
+                    <li><a href="../schemas/newick.html">Newick</a></li>
+                    <li><a href="../schemas/nexml.html">NeXML</a></li>
+                    <li><a href="../schemas/nexus.html">Nexus</a></li>
+                    <li><a href="../schemas/phylip.html">PHYLIP</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="../programs/index.html">Programs</a>
+                <ul>
+                    <li><a href="../programs/sumtrees.html">SumTrees</a></li>
+                </ul>
+            </li>
+            <li><a href="../glossary.html">Glossary and Terminological Reference</a></li>
+            <li><a href="../changes.html">Change History</a></li>
+        </ul>
+    </div -->
+
+    <!-- Downloads -->
+    <div style="border-top: double 1px white; padding-top: 10px;">
+        <h3>Obtaining</h3>
+        <ul>
+            <li><a target="_blank" href="https://pypi.org/project/peyutil">Install from the PyPI.</a></li>
+            <li><a target="_blank" href="https://github.com/OpenTreeOfLife/peyutil">Clone the git Repository.</a></li>
+        </ul>
+    </div>
+
+    <!-- Discussions -->
+    <div style="border-top: double 1px white; padding-top: 10px; position: relative;">
+        <h3><span style="text-align: left">Discussion</span></h3>
+        <ul>
+            <li><a href="https://gitter.im/OpenTreeOfLife/public">OToL open chat channel on gitter.</a></li>
+            <li><a href="https://github.com/OpenTreeOfLife/peyutil/issues">Browse issues.</a></li>
+            <li><a href="https://github.com/OpenTreeOfLife/peyutil/issues/new/choose">Open an issue.</a></li>
+        </div>
+    </div>
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">peyutil 0.0.2 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">peyutil</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020-2020, Open Tree of Life developers.
+    </div>
+  </body>
+</html>
