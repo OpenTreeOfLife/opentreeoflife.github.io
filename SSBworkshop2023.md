@@ -1,17 +1,17 @@
 ---
-title: Open Tree SSB2020
+title: Open Tree SSB2023
 layout: workshop      # DON'T CHANGE THIS.
-venue: "Using the Open Tree of Life for your Research, SSB 2020"        # brief name of host site without address (e.g., "Euphoric State University")
-address: "Hotel Indigo"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
+venue: " Synthesizing and dating phylogenies using the Open Tree of Life, SSB UNAM 2023"        # brief name of host site without address (e.g., "Euphoric State University")
+address: ""      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 language: "en"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-humandate: "Jan 3, 2020"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
-humantime: "1:30 pm - 5 pm"    # human-readable times for the workshop (e.g., "9:00 am - 4:30 pm")
-instructor: ["Emily Jane McTavish", "Mark Holder", "Luna Luisa Sanchez Reyes"] # boxed, comma-separated list of instructors' names as strings, like ["Kay McNulty", "Betty Jennings", "Betty Snyder"]
+humandate: "Jan 13, 2023"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
+humantime: "10 am - 2 pm"    # human-readable times for the workshop (e.g., "9:00 am - 4:30 pm")
+instructor: ["Mark Holder", "Emily Jane McTavish", "Luna Luisa Sanchez Reyes", "Ben Redelings"] # boxed, comma-separated list of instructors' names as strings, like ["Kay McNulty", "Betty Jennings", "Betty Snyder"]
 email: ["ejmctavish@ucmerced.edu"]    # boxed, comma-separated list of contact email addresses for the host, lead instructor, or whoever else is handling questions, like ["marlyn.wescoff@example.org", "fran.bilas@example.org", "ruth.lichterman@example.org"]
 collaborative_notes:             # optional: URL for the workshop collaborative notes, e.g. an Etherpad or Google Docs document (e.g., https://pad.carpentries.org/2015-01-01-euphoria)
 eventbrite:           # optional: alphanumeric key for Eventbrite registration, e.g., "1234567890AB" (if Eventbrite is being used)
-permalink: /SSBworkshop/
+permalink: /SSBworkshop2023/
 ---
 
 *We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
@@ -20,10 +20,9 @@ permalink: /SSBworkshop/
 <h2 id="general">Using the Open Tree of Life for your Research</h2>
 
 
-The [Open Tree of Life project](http://opentreeoflife.github.io/) is a phylogenetic resource that offers a synthetic tree summarizing evolutionary relationships across 2.6 million taxa. OpenTree (as of September 2019) also provides access to 4,168 published studies comprising 9,367 trees, and the database is growing weekly. The tips of these trees are mapped to taxonomic identifiers that link across taxonomic and informatics databases such as NCBI and The Global Biodiversity Information Facility (GBIF).
-The website also provides user-friendly resources for bulk reconciliation of taxonomic names to these standardized identifiers. Together these resources offer a formidable suite of tools and data for taxonomic name reconciliation and phylogenetic comparisons and analyses.
- This workshop will cover how to understand, access and apply these data resources from the Open Tree of Life project to your research questions. Topics will include accessing phylogenetic relationships for arbitrary sets of taxa, applying date estimates to these trees, linking phylogenetic and geographic information, assessing conflict between phylogenetic estimates, and incorporating your own phylogenetic estimates into the OpenTree of Life project.
-    The workshop will include interactive browser based exercises, demonstrations of how to access OpenTree data through the API, and tutorials in R and Python. Experience using a command line interface, R or Python will be helpful, but is not required.             
+The (Open Tree of Life project)[tree.opentreeoflife.org] provides an integrated set of tools and data resources to make phylogenetic knowledge more accessible across the diversity of life. Participants will learn to use the Open Tree of Life tools and data stores to evaluate and unite phylogenetic inferences to generate taxonomically complete synthetic trees, which they can apply to their individual research questions in evolutionary biology. The focus of this workshop is demonstrating new features of the Open Tree of Life’s infrastructure: services for adding dates to nodes, constructing supertrees from arbitrary sets of trees, and performing generalized conflict analyses. While most of the services and tools demonstrated require only a browser to access, some will require access via a command line. The tools are accessible via Windows, Mac, or Linux devices.
+
+The workshop will cover using Open Tree of Life phylogenetic study curation tools to standardize the taxonomic names and metadata for published phylogenetic estimates. We will demonstrate tools to assess concordance and conflict across different phylogenetic estimates, and between phylogenetic estimates and taxonomic relationships. Using OpenTree’s custom synthesis tools, participants will generate synthetic summary trees for their taxa based on existing phylogenetic inferences. We will apply existing node date estimates to these synthetic trees, and infer date estimates for undated nodes in trees. Together these approaches will provide participants with the skill set to obtain a dated tree for taxa of interest and understand how published estimates disagree with each other with respect to those taxa.     
 
 
 {% comment %}
@@ -47,7 +46,7 @@ ACCESSIBILITY
 
 Modify the block below if there are any barriers to accessibility or
 special instructions.
-{% endcomment %}
+
 <p id="accessibility">
   <strong>Accessibility:</strong> We are committed to making this workshop
   accessible to everybody.
@@ -65,6 +64,7 @@ special instructions.
   get in touch (using contact details below) and we will
   attempt to provide them.
 </p>
+{% endcomment %}
 
 {% comment %}
 CONTACT EMAIL ADDRESS
