@@ -17,7 +17,7 @@ permalink: /SSBworkshop2023/
 *We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
 
 
-<h2 id="general">Using the Open Tree of Life for your Research</h2>
+<h2 id="general">Synthesizing and dating phylogenies using the Open Tree of Life</h2>
 
 
 The (Open Tree of Life project)[tree.opentreeoflife.org] provides an integrated set of tools and data resources to make phylogenetic knowledge more accessible across the diversity of life. Participants will learn to use the Open Tree of Life tools and data stores to evaluate and unite phylogenetic inferences to generate taxonomically complete synthetic trees, which they can apply to their individual research questions in evolutionary biology. The focus of this workshop is demonstrating new features of the Open Tree of Life’s infrastructure: services for adding dates to nodes, constructing supertrees from arbitrary sets of trees, and performing generalized conflict analyses. While most of the services and tools demonstrated require only a browser to access, some will require access via a command line. The tools are accessible via Windows, Mac, or Linux devices.
@@ -99,7 +99,7 @@ CODE OF CONDUCT
 <h2 id="code-of-conduct">Code of Conduct</h2>
 
 <p>
-Everyone who participates in SSB2020 is required to conform to the <a href="https://systbiol.github.io/ssb2020/code_of_conduct.html">Code of Conduct</a>.
+Everyone who participates in SSB2023 is required to conform to the <a href="https://www.ib.unam.mx/ib/ssb2023/code-of-conduct/">Code of Conduct</a>.
 </p>
 
 <h2 id="notes">Collaborative Notes Document</h2>
