@@ -116,14 +116,12 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
 <div class="row">
   <div class="col-md-6">
     <table class="table table-striped">
-    <tr> <td>12:00</td>  <td>Lunch</td> </tr>
-    <tr> <td>12:30</td>  <td>Intro to OpenTree</td> </tr>
-    <tr> <td>12:50</td>  <td>Supertree synthesis</td> </tr>
-    <tr> <td>1:10</td>  <td><a href = "https://github.com/snacktavish/OpenTree_SSB2020">Bulk TNRS, induced subtrees and study search in Python</a></td> </tr>
-    <tr> <td>1:45</td>  <td>Coffee break</td> </tr>
-    <tr> <td>2:00</td>  <td><a href = "https://lunasare.github.io/ssb2020_workshop/index.html">Getting synthetic trees and dates in R</a></td> </tr>
-    <tr> <td>3:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
-    <tr> <td>4:00</td>  <td>END</td> </tr>
+    <tr> <td>10:00</td>  <td>Intro to OpenTree</td> </tr>
+    <tr> <td>10:30</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
+    <tr> <td>11:30</td>  <td>Custom Supertree synthesis</td> </tr>
+    <tr> <td>12:00</td>  <td>Lunch</tr>
+    <tr> <td>12:45</td>  <td>???</td> </tr>
+    <tr> <td>2:00</td>  <td>END</td> </tr>
     </table>
   </div>
 </div>
@@ -146,8 +144,8 @@ please preview your site before committing, and make sure to run
 
 <p>
   To participate in this workshop,
-  you will need to be able to access RStudio, Python3 and Jupyter notebooks, and use git to clone repos.
-  In addition, you will need an up-to-date web browser.
+  you will need to be able to access Bash, Python3 and (optionally) Jupyter notebooks, and use git to clone repos.
+  In addition, you will need an up-to-date web browser and a text editor.
 
   If you already have these software installed and accessible on your laptop, please skip to the bottom and run the checks.
   Otherwise there are installation instructions listed below.
@@ -160,7 +158,7 @@ please preview your site before committing, and make sure to run
 </p>
 
 
-{% include setup.html %}
+{% include setupNoR.html %}
 
 <h2 id="Installation checks">Installation checks (Please complete before the workshop starts)</h2>
 <p>
@@ -184,24 +182,6 @@ This should print out some text that starts with "usage: git [--version] [--help
 This should open up a browser window that says "jupyter" at the top. If you click on 'new' in the upper right, there should be an option to create a python3 notebook.
 
 (You can close this window and close the terminal.)  
-
-
-<h3 id="RStudio check">RStudio check</h3>
-
-<p>  
-  Open RStudio. Click in the 'console' window. (It's the one with the '>')  
-
- Run:  
-
- <pre>
-    > version$version.string
-    > install.packages("rotl")
-    > install.packages(c("devtools", "ape", "stringr"))
-    > devtools::install_github("phylotastic/datelife")
-
- </pre>
-
- Make sure your version is at least 3.6.0 or higher.  The r opentree installation output should end with "* DONE (rotl)"
 
   <br>
 If theses checks work, then you are all set!   
