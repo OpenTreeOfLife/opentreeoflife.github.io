@@ -118,10 +118,10 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
   <div class="col-md-6">
     <table class="table table-striped">
     <tr> <td>9:00</td>  <td>Intro to OpenTree</td> </tr>
-    <tr> <td>9:30</td>  <td>Conflict analysis</td> </tr>
-    <tr> <td>10:15</td>  <td><a href = "https://tree/opentreeoflife.org/curator">Uploading trees and making collections</a></td> </tr>
-    <tr> <td>11:00</td>  <td>Custom SuperTree Synthesis</td> </tr>
-    <tr> <td>12:00</td>  <td>Getting dates for nodes and trees</td> </tr>
+    <tr> <td>9:30</td>  <td>Conflict analyses</td></tr>
+    <tr> <td>10:15</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
+    <tr> <td>11:00</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
+    <tr> <td>12:00</td>  <td>Adding dates and labels to custom synthesis trees</td></tr>
     <tr> <td>1:00</td>  <td>END</td> </tr>
     </table>
   </div>
@@ -187,4 +187,3 @@ This should open up a browser window that says "jupyter" at the top. If you clic
   <br>
 If theses checks work, then you are all set!   
  Otherwise, please follow the installation instructions above, and then try these tests again. Contact <a href='mailto:{{page.email}}'>{{page.email}}</a> if you are still having issues.
-</p>
