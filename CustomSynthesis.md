@@ -54,15 +54,20 @@ The fundamental steps are:
   <li>Download the results</li>
 </ol>
 
+<hr />
+
 <h2 id="collection">#1 Creating an input collection</h2>
 
 The input trees have to be in curated in the Open Tree of Life's corpus of published trees. Fortunately, you just had a tutorial on how to add trees to that database.
 
 <h3>1A. Find input trees</h3>
 
-If you know what trees you want to include, just make sure that you know the "study ID" and "tree ID" for each tree.
+If you know what trees you want to include, just make sure that you know the "Study ID" and "Tree Name" for each tree.
 Or you can conduct a search for trees that include a taxon.
-To do this you can:
+
+To search you can use the search box on <a href="https://tree.opentreeoflife.org/curator/" target="_blank">https://tree.opentreeoflife.org/curator/</a>, though that will only return studies tagged with the taxon name in some crucial fields.
+
+To do a more thorough search, you can:
 
 <ol>
   <li>Navigate to <a target="_blank"  href="https://tree.opentreeoflife.org/taxonomy/browse">https://tree.opentreeoflife.org/taxonomy/browse</a> and use
@@ -77,10 +82,69 @@ curl -XPOST https://api.opentreeoflife.org/v3/studies/find_trees -H "content-typ
    to find trees that include primates.</li>
 </ol>
 
-For this exercise: <strong>Make sure you know the (studyID, treeID) pairs for at least 2 trees</strong>.
+For this exercise: <strong>Make sure you know the (Study ID, Tree Name) pairs for at least 2 trees</strong>.
+Note: if you use the API search, the "Tree Name" is the "@label" field of the response. 
 
 <h3>1B. Create a new collection</h3>
 Click on your user name at the top-right of <a target="_blank" href="https://tree.opentreeoflife.org/curator">https://tree.opentreeoflife.org/curator</a> to reveal the menu and choose "My collections".
 
-<img src="/images/curator-my-collections.png" alt="screenshot of the top banner of the curator app, showing the drop-down menu from the user-name" width="600px"/>
+<img src="/images/curator-my-collections.png" alt="screenshot of the top banner of the curator app, showing the drop-down menu from the user-name" width="700px"/>
 
+
+This will take you to your curator's profile, which has a URL
+similar to:
+<tt>https://tree.opentreeoflife.org/curator/profile/mtholder#collections</tt>
+except with your username in place of <tt>mtholder</tt>.
+
+<strong>Click "Create new tree collection" button</strong> to create the list of trees to use. Choose a simple name (just letters and number) for the collection.
+
+<strong>Save</strong> the collection. This should redirect you
+to a full-screen page for adding trees to the collection.
+
+Add trees by repeatedly:
+<ol>
+  <li>Clicking on the "Add a tree to this collection" button</li>
+  <li>Clicking on the magnifying glass button near the "by matching a study" prompt.</li>
+  <li>Typing in the study ID (starting with <tt>pg_</tt> or <tt>ot_</tt>) in the box</li>
+  <li>Clicking on the study citation when it appears by the box</li>
+  <li>Choosing the tree name from the drop down menu</li>
+  <li>Clicking on the "+" button</li>
+</ol>
+
+<strong>Reorder</strong> you trees using the rank column, if you added them in an order that you don't like.
+
+<strong>Save</strong> the collection ("Save Collection" button near the top).
+
+<h2>#2 Choose your root taxon</h2>
+Use <a target="_blank"  href="https://tree.opentreeoflife.org/taxonomy/browse">https://tree.opentreeoflife.org/taxonomy/browse</a> 
+to find the Open Tree of Life Taxonomy's name for taxon that is of interest to you.
+
+Presumably all of the trees that you put in the collection would contain some members of this taxon, but the taxon need not include the entirety of the input trees. The synthesis algorithm will trim the input trees down so that only portions relevant to this taxon will be used.
+
+<strong>Please</strong> do not conduct analyses of over 10,000 species during the workshop, because we will all be sharing computational resources
+
+<strong>Note the OTT ID</strong> of the taxon, too.
+
+
+<h2>#3 launch a custom synthesis run</h2>
+We have not fully tested the custom synthesis procedure yet, so it is on a testing server at the moment.
+
+Direct your web browser to <a href="https://ot38.opentreeoflife.org/v3/tree_of_life/launch_custom" target="_blank">https://ot38.opentreeoflife.org/v3/tree_of_life/launch_custom</a>
+
+
+<ol>
+  <li>Select your user name after the "Collection to use:" label</li>
+  <li>Select the name of the collection that you want to use. If you don't see your collection: make sure that you saved it, and use the "Refresh list of collections" button</li>
+  <li>Start to type the root taxon name in "Search for name" and pause after the first few letters to allow it to autocomplete the name. You may have to add more letters to narrow down the options.</li>
+  <li>Select the name of the taxon when you have found it in the autocomplete list. This should fill in the OTT ID field.</li>
+  <li>If everything looks correct, click the "Request build for..." button <strong>only once</strong>
+</ol>
+
+That should redirect you to a page (with a URL that starts with https://ot38.opentreeoflife.org/v3/tree_of_life/browse_custom) which highlights the synthesis run you just requested.
+
+You can use the "Refresh" button to update the status. Hopefully, it will eventually go to "COMPLETED."
+
+If the status changes to "REDIRECTED" it means that the server detected the same root taxon and the same set of input trees in another run, so it will give you a link to that previous run (rather than recomputing the synthesis).
+
+This is still a testing service. So, if the status changes to "FAILED", please let us know by filling out the fields of a new issue with the 
+synth_id that failed <a href="https://github.com/OpenTreeOfLife/feedback/issues/new/choose">in this GitHub issue tracker</a>.
