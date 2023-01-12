@@ -32,11 +32,11 @@ Typically the input trees are not taxonomically complete - they
 each only contain a subset of the full collection of species. 
 However the output tree contains all of the species mentioned in any of the input trees.
 
-See <a href="https://peerj.com/articles/3058/">https://peerj.com/articles/3058/</a> (and subsequent papers by Redelings and Holder) for the detains  of how the 
+See <a target="_blank"  href="https://peerj.com/articles/3058/">https://peerj.com/articles/3058/</a> (and subsequent papers by Redelings and Holder) for the details of how the 
 supertree is constructed. 
 The most important features to be aware of are:
 <ol>
-  <li>The algorithm builds a synthetic tree by addign as many groupings from the input trees as it can.</li>
+  <li>The algorithm builds a synthetic tree by adding as many groupings from the input trees as it can.</li>
   <li>The order of the input trees matters. Addition of grouping occurs according to the order of trees in the input list.</li>
   <li>The Open Tree Taxonomy is used as the last input tree - so the output will be as comprehensive as the Open Tree Taxonomy.</li>
 </ol>
@@ -54,6 +54,26 @@ The fundamental steps are:
   <li>Download the results</li>
 </ol>
 
-
-
 <h2 id="collection">Creating an input collection</h2>
+
+The input trees have to be in curated in the Open Tree of Life's corpus of published trees. Fortunately, you just had a tutorial on how to add trees to that database.
+
+<h3>Finding possible input trees</h3>
+
+If you know what trees you want to include, just make sure that you know the "study ID" and "tree ID" for each tree.
+
+Or you can conduct a search for trees that include a taxon.
+To do this you can:
+
+<ol>
+  <li>Navigate to <a target="_blank"  href="https://tree.opentreeoflife.org/taxonomy/browse">https://tree.opentreeoflife.org/taxonomy/browse</a> and use
+    the search box to find the taxon you want. <strong>Write down it's OTT ID</strong> (this ID is in the "Taxon details" section of the page).</li>
+  <li>Use the Open Tree web-service API to search for trees that include that taxon.
+    For instance I found that <a target="_blank" href="https://tree.opentreeoflife.org/taxonomy/browse?name=Primates">the taxon Primates has the the OTT ID of 913935)</a>.
+    So (from a terminal) I can run the command:
+<pre>
+curl -XPOST https://api.opentreeoflife.org/v3/studies/find_trees -H "content-type:application/json" \
+  -d '{"property":"ot:ottId", "value":913935, "verbose":true}'
+</pre>
+   to find trees that include primates.</li>
+   </ol>
