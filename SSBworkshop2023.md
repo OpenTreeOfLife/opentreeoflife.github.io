@@ -110,18 +110,19 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
 <hr/>
 
 
-<h2 id="schedule">Draft Schedule (subject to change based on interest)</h2>
+
+<h2 id="schedule">Schedule</h2>
 
 
 <div class="row">
   <div class="col-md-6">
     <table class="table table-striped">
-    <tr> <td>10:00</td>  <td>Intro to OpenTree</td> </tr>
-    <tr> <td>10:30</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
-    <tr> <td>11:30</td>  <td>Custom Supertree synthesis</td> </tr>
-    <tr> <td>12:00</td>  <td>Lunch</tr>
-    <tr> <td>12:45</td>  <td>???</td> </tr>
-    <tr> <td>2:00</td>  <td>END</td> </tr>
+    <tr> <td>9:00</td>  <td>Intro to OpenTree</td> </tr>
+    <tr> <td>9:30</td>  <td>Conflict analysis</td> </tr>
+    <tr> <td>10:15</td>  <td><a href = "https://tree/opentreeoflife.org/curator">Uploading trees and making collections</a></td> </tr>
+    <tr> <td>11:00</td>  <td>Custom SuperTree Synthesis</td> </tr>
+    <tr> <td>12:00</td>  <td>Getting dates for nodes and trees</td> </tr>
+    <tr> <td>1:00</td>  <td>END</td> </tr>
     </table>
   </div>
 </div>
