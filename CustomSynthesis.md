@@ -137,7 +137,7 @@ Direct your web browser to <a href="https://ot38.opentreeoflife.org/v3/tree_of_l
   <li>Select the name of the collection that you want to use. If you don't see your collection: make sure that you saved it, and use the "Refresh list of collections" button</li>
   <li>Start to type the root taxon name in "Search for name" and pause after the first few letters to allow it to autocomplete the name. You may have to add more letters to narrow down the options.</li>
   <li>Select the name of the taxon when you have found it in the autocomplete list. This should fill in the OTT ID field.</li>
-  <li>If everything looks correct, click the "Request build for..." button <strong>only once</strong>
+  <li>If everything looks correct, click the "Request build for..." button <strong>only once</strong></li>
 </ol>
 
 That should redirect you to a page (with a URL that starts with https://ot38.opentreeoflife.org/v3/tree_of_life/browse_custom) which highlights the synthesis run you just requested.
