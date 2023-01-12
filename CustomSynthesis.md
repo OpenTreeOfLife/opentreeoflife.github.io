@@ -1,5 +1,5 @@
 ---
-title: Open Tree SSB2023
+title: SSB2023 - Custom Synthesis
 layout: workshop      # DON'T CHANGE THIS.
 venue: " Synthesizing and dating phylogenies using the Open Tree of Life, SSB UNAM 2023"        # brief name of host site without address (e.g., "Euphoric State University")
 address: ""      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
@@ -11,7 +11,7 @@ instructor: ["Mark Holder", "Emily Jane McTavish", "Luna Luisa Sanchez Reyes", "
 email: ["ejmctavish@ucmerced.edu"]    # boxed, comma-separated list of contact email addresses for the host, lead instructor, or whoever else is handling questions, like ["marlyn.wescoff@example.org", "fran.bilas@example.org", "ruth.lichterman@example.org"]
 collaborative_notes:             # optional: URL for the workshop collaborative notes, e.g. an Etherpad or Google Docs document (e.g., https://pad.carpentries.org/2015-01-01-euphoria)
 eventbrite:           # optional: alphanumeric key for Eventbrite registration, e.g., "1234567890AB" (if Eventbrite is being used)
-permalink: /SSBworkshop2023/
+permalink: /CusomSynth/
 ---
 
 *We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
@@ -119,7 +119,7 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
     <tr> <td>9:00</td>  <td>Intro to OpenTree</td> </tr>
     <tr> <td>9:30</td>  <td>Conflict analyses</td></tr>
     <tr> <td>10:15</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
-    <tr> <td>11:00</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
+    <tr> <td>11:00</td>  <td>Custom Supertree synthesis</td> </tr>
     <tr> <td>12:00</td>  <td>Adding dates and labels to custom synthesis trees</td></tr>
     <tr> <td>1:00</td>  <td>END</td> </tr>
     </table>
@@ -186,3 +186,4 @@ This should open up a browser window that says "jupyter" at the top. If you clic
   <br>
 If theses checks work, then you are all set!   
  Otherwise, please follow the installation instructions above, and then try these tests again. Contact <a href='mailto:{{page.email}}'>{{page.email}}</a> if you are still having issues.
+</p>
