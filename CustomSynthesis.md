@@ -148,3 +148,29 @@ If the status changes to "REDIRECTED" it means that the server detected the same
 
 This is still a testing service. So, if the status changes to "FAILED", please let us know by filling out the fields of a new issue with the 
 synth_id that failed <a href="https://github.com/OpenTreeOfLife/feedback/issues/new/choose">in this GitHub issue tracker</a>.
+
+
+<h2>#4 Understanding the results</h2>
+If the status of you run made it to "COMPLETED" or "REDIRECTED" then 
+you should see a "download" link appear.
+
+<strong>Download</strong> the archive.
+
+On some platforms, you should be able to double-click to extract the downloaded archive.
+The archive has a <tt>tar.gz</tt> extension, because it is a directory that was collected into 1 archive using <tt>tar</tt> and
+then compressed using <tt>gzip</tt>.
+
+If double-clicking doesn't work for you, then open a terminal, and navigate to the Download directory containing the archive using the <tt>cd</tt> command.
+
+Then use the <tt>tar xfvz </tt> with a filename, to unpack the archive. For example, I used (from a new terminal session):
+
+<pre>
+  cd Downloads
+  tar xfvz mtholder_prim2_913935_tmpsr44rdvv.tar.gz
+</pre>
+
+to unpack my results.
+
+The final tree is in the <tt>labelled_supertree</tt> subdirectory.
+
+You can open the <tt>index.html</tt> file at the top of each directory of the archive in a browser to see explanations of the contents of that directory.
