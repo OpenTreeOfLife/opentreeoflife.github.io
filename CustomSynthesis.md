@@ -18,12 +18,41 @@ permalink: /CustomSynthesis/
 
 See https://opentreeoflife.github.io/SSBworkshop2023/ for the schedule to the full workshop.
 
-<h2 id="general">Open Tree of Life "Custom synthesis"</h2>
+<h2 id="general">The Open Tree of Life "synthetic tree"</h2>
 
 
-The (Open Tree of Life project)[tree.opentreeoflife.org] provides an integrated set of tools and data resources to make phylogenetic knowledge more accessible across the diversity of life. Participants will learn to use the Open Tree of Life tools and data stores to evaluate and unite phylogenetic inferences to generate taxonomically complete synthetic trees, which they can apply to their individual research questions in evolutionary biology. The focus of this workshop is demonstrating new features of the Open Tree of Life’s infrastructure: services for adding dates to nodes, constructing supertrees from arbitrary sets of trees, and performing generalized conflict analyses. While most of the services and tools demonstrated require only a browser to access, some will require access via a command line. The tools are accessible via Windows, Mac, or Linux devices.
+The Open Tree of Life project
+produces a supertree estimate of the full tree of Life.
+This tree has been called the Open Tree "synthetic tree", 
+but "supertree" would be a more specific name.
 
-The workshop will cover using Open Tree of Life phylogenetic study curation tools to standardize the taxonomic names and metadata for published phylogenetic estimates. We will demonstrate tools to assess concordance and conflict across different phylogenetic estimates, and between phylogenetic estimates and taxonomic relationships. Using OpenTree’s custom synthesis tools, participants will generate synthetic summary trees for their taxa based on existing phylogenetic inferences. We will apply existing node date estimates to these synthetic trees, and infer date estimates for undated nodes in trees. Together these approaches will provide participants with the skill set to obtain a dated tree for taxa of interest and understand how published estimates disagree with each other with respect to those taxa.     
+A supertree is a phylogenetic estimate that uses input trees
+as the data source for the estimation.
+Typically the input trees are not taxonomically complete - they 
+each only contain a subset of the full collection of species. 
+However the output tree contains all of the species mentioned in any of the input trees.
+
+See https://peerj.com/articles/3058/ (and subsequent papers by Redelings and Holder) for the detains  of how the 
+supertree is constructed. 
+The most important features to be aware of are:
+<ol>
+  <li>The algorithm builds a synthetic tree by addign as many groupings from the input trees as it can.</li>
+  <li>The order of the input trees matters. Addition of grouping occurs according to the order of trees in the input list.</li>
+  <li>The Open Tree Taxonomy is used as the last input tree - so the output will be as comprehensive as the Open Tree Taxonomy.</li>
+</ol>
+
+
+<h2 id="general">"Custom synthesis"</h2>
+In this workshop, we will use a new (and relatively untested)
+interface that allows you to apply the Open Tree of Life synthesis pipeline to a set of trees of your choosing.
+
+The fundamental steps are:
+<ol>
+  <li>Store an (ordered) list of input trees in a "collection"</li>
+  <li>Choose the root taxon for the analysis (<strong>Please</strong> do not conduct analyses of over 10,000 species during the workshop, because we will all be sharing computational resources).</li>
+  <li>Submit those inputs to the server</li>
+  <li>Download the results</li>
+</ol>
 
 
 
