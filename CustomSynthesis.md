@@ -32,7 +32,7 @@ Typically the input trees are not taxonomically complete - they
 each only contain a subset of the full collection of species. 
 However the output tree contains all of the species mentioned in any of the input trees.
 
-See https://peerj.com/articles/3058/ (and subsequent papers by Redelings and Holder) for the detains  of how the 
+See <a href="https://peerj.com/articles/3058/">https://peerj.com/articles/3058/</a> (and subsequent papers by Redelings and Holder) for the detains  of how the 
 supertree is constructed. 
 The most important features to be aware of are:
 <ol>
@@ -56,4 +56,4 @@ The fundamental steps are:
 
 
 
-<h2 id="setup">Setup</h2>
+<h2 id="collection">Creating an input collection</h2>
