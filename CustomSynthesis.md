@@ -61,7 +61,6 @@ The input trees have to be in curated in the Open Tree of Life's corpus of publi
 <h3>1A. Find input trees</h3>
 
 If you know what trees you want to include, just make sure that you know the "study ID" and "tree ID" for each tree.
-
 Or you can conduct a search for trees that include a taxon.
 To do this you can:
 
@@ -78,8 +77,10 @@ curl -XPOST https://api.opentreeoflife.org/v3/studies/find_trees -H "content-typ
    to find trees that include primates.</li>
 </ol>
 
+For this exercise: <strong>Make sure you know the (studyID, treeID) pairs for at least 2 trees</strong>.
+
 <h3>1B. Create a new collection</h3>
 Click on your user name at the top-right of <a target="_blank" href="https://tree.opentreeoflife.org/curator">https://tree.opentreeoflife.org/curator</a> to reveal the menu and choose "My collections".
 
-<img src="./images/curator-my-collections.png" alt="screenshot of the top banner of the curator app, showing the drop-down menu from the user-name" />
+<img src="/images/curator-my-collections.png" alt="screenshot of the top banner of the curator app, showing the drop-down menu from the user-name" />
 
