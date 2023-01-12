@@ -54,11 +54,11 @@ The fundamental steps are:
   <li>Download the results</li>
 </ol>
 
-<h2 id="collection">Creating an input collection</h2>
+<h2 id="collection">#1 Creating an input collection</h2>
 
 The input trees have to be in curated in the Open Tree of Life's corpus of published trees. Fortunately, you just had a tutorial on how to add trees to that database.
 
-<h3>Finding possible input trees</h3>
+<h3>1A. Find input trees</h3>
 
 If you know what trees you want to include, just make sure that you know the "study ID" and "tree ID" for each tree.
 
@@ -76,4 +76,10 @@ curl -XPOST https://api.opentreeoflife.org/v3/studies/find_trees -H "content-typ
   -d '{"property":"ot:ottId", "value":913935, "verbose":true}'
 </pre>
    to find trees that include primates.</li>
-   </ol>
+</ol>
+
+<h3>1B. Create a new collection</h3>
+Click on your user name at the top-right of <a target="_blank" href="https://tree.opentreeoflife.org/curator">https://tree.opentreeoflife.org/curator</a> to reveal the menu and choose "My collections".
+
+<img src="./images/curator-my-collections.png" alt="screenshot of the top banner of the curator app, showing the drop-down menu from the user-name" />
+
