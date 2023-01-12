@@ -110,7 +110,8 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
 <hr/>
 
 
-<h2 id="schedule">Draft Schedule (subject to change based on interest)</h2>
+
+<h2 id="schedule">Schedule</h2>
 
 
 <div class="row">
