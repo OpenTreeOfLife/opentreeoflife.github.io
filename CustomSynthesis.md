@@ -16,7 +16,7 @@ permalink: /CustomSynthesis/
 
 *We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
 
-See https://opentreeoflife.github.io/SSBworkshop2023/ for the schedule to the full workshop.
+See https://opentreeoflife.github.io/SSBworkshop2023/ for the schedule of the full workshop.
 
 <h2 id="general">The Open Tree of Life "synthetic tree"</h2>
 
@@ -71,9 +71,9 @@ To do a more thorough search, you can:
 
 <ol>
   <li>Navigate to <a target="_blank"  href="https://tree.opentreeoflife.org/taxonomy/browse">https://tree.opentreeoflife.org/taxonomy/browse</a> and use
-    the search box to find the taxon you want. <strong>Write down it's OTT ID</strong> (this ID is in the "Taxon details" section of the page).</li>
+    the search box to find the taxon you want. <strong>Write down its OTT ID</strong> (this ID is in the "Taxon details" section of the page).</li>
   <li>Use the Open Tree web-service API to search for trees that include that taxon.
-    For instance I found that <a target="_blank" href="https://tree.opentreeoflife.org/taxonomy/browse?name=Primates">the taxon Primates has the the OTT ID of 913935)</a>.
+    For instance I found that <a target="_blank" href="https://tree.opentreeoflife.org/taxonomy/browse?name=Primates">the taxon Primates has the OTT ID of 913935)</a>.
     So (from a terminal) I can run the command:
 <pre>
 curl -XPOST https://api.opentreeoflife.org/v3/studies/find_trees -H "content-type:application/json" \
@@ -111,7 +111,7 @@ Add trees by repeatedly:
   <li>Clicking on the "+" button</li>
 </ol>
 
-<strong>Reorder</strong> you trees using the rank column, if you added them in an order that you don't like.
+<strong>Reorder</strong> your trees using the rank column, if you added them in an order that you don't like.
 
 <strong>Save</strong> the collection ("Save Collection" button near the top).
 
@@ -126,7 +126,7 @@ Presumably all of the trees that you put in the collection would contain some me
 <strong>Note the OTT ID</strong> of the taxon, too.
 
 
-<h2>#3 launch a custom synthesis run</h2>
+<h2>#3 Launch a custom synthesis run</h2>
 We have not fully tested the custom synthesis procedure yet, so it is on a testing server at the moment.
 
 Direct your web browser to <a href="https://ot38.opentreeoflife.org/v3/tree_of_life/launch_custom" target="_blank">https://ot38.opentreeoflife.org/v3/tree_of_life/launch_custom</a>
