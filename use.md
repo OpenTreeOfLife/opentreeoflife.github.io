@@ -7,16 +7,24 @@ permalink: /use
 # Workshops and Materials
 ## Most up to date tutorials
 
+
+### Custom phylogenetic synthesis
+[Custom synthesis](https://opentreeoflife.github.io/CustomSynthesis/)  
+
+
+### Estimating dates on phylogenies
+[OpenTree Dates](https://github.com/McTavishLab/jupyter_OpenTree_tutorials/blob/master/notebooks/DEMO_DatedTree.ipynb)  
+
 ### R tutorials
 See Luna Luisa Sanchez-Reyes' [Open Tree with R tutorial](https://mctavishlab.github.io/R_OpenTree_tutorials/index.html) for a very nice
 introduction of how to efficiently use the
  [rotl](https://github.com/ropensci/rotl) package and [DateLife](https://www.biorxiv.org/content/10.1101/782094v1) for interacting with Open Tree's web services.
 
 ### Python and Jupyter tutorials
-[Install instructions](https://opentree.readthedocs.io/en/latest/notebooks.html)
-[Getting a tree of all bird families](https://github.com/OpenTreeOfLife/python-opentree/blob/main/docs/notebooks/bird_families/TreeOfBirdFamilies.ipynb)
-[Getting a tree for GBIF records](https://github.com/OpenTreeOfLife/python-opentree/blob/main/docs/notebooks/gbif/GBIF_to_OpenTree.ipynb)
-[Dating synthetic trees](https://github.com/OpenTreeOfLife/ChronoSynth/blob/main/examples/Custom_synth_dating.ipynb)
+[Install instructions](https://opentree.readthedocs.io/en/latest/notebooks.html)  
+[Getting a tree of all bird families](https://github.com/OpenTreeOfLife/python-opentree/blob/main/docs/notebooks/bird_families/TreeOfBirdFamilies.ipynb)  
+[Getting a tree for GBIF records](https://github.com/OpenTreeOfLife/python-opentree/blob/main/docs/notebooks/gbif/GBIF_to_OpenTree.ipynb)  
+[Dating synthetic trees](https://github.com/OpenTreeOfLife/ChronoSynth/blob/main/examples/Custom_synth_dating.ipynb)  
 
 
 
@@ -34,6 +42,7 @@ Our current API is documented at [here](https://github.com/OpenTreeOfLife/germin
 ## Older materials
 
 ### Previous workshops
+[SSB 2023](https://opentreeoflife.github.io/SSBworkshop2023/)  
 [SSB 2020](SSBworkshop/)  
 [Berkeley Feb 2020](AWworkshop)
 

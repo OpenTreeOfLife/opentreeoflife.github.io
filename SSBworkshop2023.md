@@ -121,7 +121,7 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collabor
     <tr> <td>9:30</td>  <td>Conflict analyses</td></tr>
     <tr> <td>10:15</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
     <tr> <td>11:00</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
-    <tr> <td>12:00</td>  <td>Adding dates and labels to custom synthesis trees</td></tr>
+    <tr> <td>12:00</td>  <td><a href="https://github.com/McTavishLab/jupyter_OpenTree_tutorials/blob/master/notebooks/DEMO_DatedTree.ipynb" target="_blank">Adding dates to synthesis trees</a></td></tr>
     <tr> <td>1:00</td>  <td>END</td> </tr>
     </table>
   </div>
