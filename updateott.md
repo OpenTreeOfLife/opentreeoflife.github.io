@@ -22,9 +22,9 @@ permalink: /updateott/
 ## Create an `edOTT` 
 The `otc-taxonomy-patcher` does not read all of the details of the taxon amendments file. You have to bundle the taxon amendments into one blob that simplifies them and conducts some checks that would be tedious to do in C++
 
-   1. Figure out the SHA of the commit of the **amendments-1** repo was that at when the most recent edOTT##.json file was created. Ideally this would be in <a href="https://github.com/OpenTreeOfLife/edOTTs/blob/main/README.md">the edOTTs README.md</a>; the OTifacts file mentioned above may have it, if it is not present.
+  1. Figure out the SHA of the commit of the **amendments-1** repo was that at when the most recent edOTT##.json file was created. Ideally this would be in <a href="https://github.com/OpenTreeOfLife/edOTTs/blob/main/README.md">the edOTTs README.md</a>; the OTifacts file mentioned above may have it, if it is not present.
 
-   2. Let's call this SHA LAST_INCORPORATED_SHA
+  2. Let's call this SHA LAST_INCORPORATED_SHA
 
 then you can run (assuming that you have all of the `amendments-1`, `otcetera`, and `edOTTs` repos as children of `${OPENTREE_ROOT}`
 
@@ -43,29 +43,29 @@ The bash script is equivalent to the following commands.
 First, you set some env variables that will depend on your setup and the OTT versions you are dealing with:
 
 
-  export OPENTREE_ROOT="${HOME}/opentree"
-  export PREV_OTT_DIR="${OPENTREE_ROOT}/ott/ott3.7.2"
-  export NEW_OTT_DIR="${OPENTREE_ROOT}/ott/ott3.7.3"
-  export NEW_OTT_VERSION="3.7draft3"
-  export NEW_EDOTT_FILENAME="edott-000015.json"
+    export OPENTREE_ROOT="${HOME}/opentree"
+    export PREV_OTT_DIR="${OPENTREE_ROOT}/ott/ott3.7.2"
+    export NEW_OTT_DIR="${OPENTREE_ROOT}/ott/ott3.7.3"
+    export NEW_OTT_VERSION="3.7draft3"
+    export NEW_EDOTT_FILENAME="edott-000015.json"
 
 Note in these examples, I have an `ott` directory below `OPENTREE_ROOT` which holds the full (uncompressed) versions of the OTT taxonomies.
 
 With those variables set you should be able run:
 
 
-  rm -f "${NEW_OTT_DIR}/forwards.tsv"
-  rm -f "${NEW_OTT_DIR}/synonyms.tsv"
-  rm -f "${NEW_OTT_DIR}/taxonomy.tsv"
-  rm -f "${NEW_OTT_DIR}/version.txt"
+    rm -f "${NEW_OTT_DIR}/forwards.tsv"
+    rm -f "${NEW_OTT_DIR}/synonyms.tsv"
+    rm -f "${NEW_OTT_DIR}/taxonomy.tsv"
+    rm -f "${NEW_OTT_DIR}/version.txt"
 
-  otc-taxonomy-patcher   \
-    --demand-all-applied \
-    --edits "${OPENTREE_ROOT}/edOTTs/${NEW_EDOTT_FILENAME}" \
-    "${PREV_OTT_DIR}" \
-    --write-taxonomy "${OPENTREE_DEST}" 2>&1 | tee "cruft/patch-${NEW_OTT_VERSION}.log" || exit
-  echo "${NEW_OTT_VERSION}" > "${NEW_OTT_DIR}/version.txt"
-  rm otc-taxonomy-patcher.log.txt
+    otc-taxonomy-patcher   \
+      --demand-all-applied \
+      --edits "${OPENTREE_ROOT}/edOTTs/${NEW_EDOTT_FILENAME}" \
+      "${PREV_OTT_DIR}" \
+      --write-taxonomy "${OPENTREE_DEST}" 2>&1 | tee "cruft/patch-${NEW_OTT_VERSION}.log" || exit
+    echo "${NEW_OTT_VERSION}" > "${NEW_OTT_DIR}/version.txt"
+    rm otc-taxonomy-patcher.log.txt
 
 The first `rm` commands are just a good idea in case you have to patch multiple times.
 
