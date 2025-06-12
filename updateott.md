@@ -63,7 +63,7 @@ With those variables set you should be able run:
       --demand-all-applied \
       --edits "${OPENTREE_ROOT}/edOTTs/${NEW_EDOTT_FILENAME}" \
       "${PREV_OTT_DIR}" \
-      --write-taxonomy "${OPENTREE_DEST}" 2>&1 | tee "cruft/patch-${NEW_OTT_VERSION}.log" || exit
+      --write-taxonomy "${NEW_OTT_DIR}" 2>&1 | tee "cruft/patch-${NEW_OTT_VERSION}.log" || exit
     echo "${NEW_OTT_VERSION}" > "${NEW_OTT_DIR}/version.txt"
     rm otc-taxonomy-patcher.log.txt
 
