@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Updating OTT with taxa added via taxon-addition feature
+title: Update OTT
 permalink: /updateott/
 ---
 
@@ -90,7 +90,27 @@ which indicates that `Protanilla boltoni` was added by an earlier amendment with
 ## Commit and push edOTT
   1. Note the current HEAD of the amendments-1 repo in the commit and README.md
 
+
+## scp OTT to to files.opentreeoflife.org
+e.g.
+
+    tar cfvz ott3.7.3.tgz ott3.7.3
+    scp ott3.7.3.tgz files.opentreeoflife.org
+    ssh files.opentreeoflife.org
+
+then move the archive to the appropriate apache-served directory on that server.
+
+## back up OTT to AWS S3 storage
+
 ## Rebuild the synth tree
+See <a href="./updatetree/" target="_blank">Update Tree</a>.
+
+## Create a new ott#.#.md doc in reference-taxonomy/doc
+Markdown documentation of the OTT build. The output of the synth is useful for getting the number of visible taxa in OTT.
+
+## Create a new ot-synthesis-v#.#.md doc in germinator/doc
+Markdown documentation of the tree build.
+
 
 ## Deploy the synth tree and OTT
 
