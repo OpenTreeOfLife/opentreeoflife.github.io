@@ -29,7 +29,10 @@ The `otc-taxonomy-patcher` does not read all of the details of the taxon amendme
 then you can run (assuming that you have all of the `amendments-1`, `otcetera`, and `edOTTs` repos as children of `${OPENTREE_ROOT}`
 
     cd ${OPENTREE_ROOT}
-    ${OPENTREE_ROOT}/otcetera/scripts/semanticize_amendments.py amendments-1 LAST_INCORPORATED_SHA > ${OPENTREE_ROOT}/edOTTs/edott-#####.json 
+    ${OPENTREE_ROOT}/otcetera/scripts/semanticize_amendments.py \
+        amendments-1 \
+        LAST_INCORPORATED_SHA \
+        > ${OPENTREE_ROOT}/edOTTs/edott-#####.json 
 
 where you substitute the actual SHA for `LAST_INCORPORATED_SHA`. Make sure that command succeeds.
 
