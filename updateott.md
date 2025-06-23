@@ -103,7 +103,7 @@ then move the archive to the appropriate apache-served directory on that server.
 ## back up OTT to AWS S3 storage
 
 ## Rebuild the synth tree
-See <a href="./updatetree/" target="_blank">Update Tree</a>.
+See <a href="../updatetree/" target="_blank">Update Tree</a>.
 
 ## Create a new ott#.#.md doc in reference-taxonomy/doc
 Markdown documentation of the OTT build. The output of the synth is useful for getting the number of visible taxa in OTT.
