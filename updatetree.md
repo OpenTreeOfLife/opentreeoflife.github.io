@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Updating the supertree
-permalink: /updatesynth/
+permalink: /updatetree/
 ---
 
 
