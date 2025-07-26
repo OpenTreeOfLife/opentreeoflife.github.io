@@ -16,6 +16,6 @@ title: Maintenance - Open Tree of Life
 
     Some Open Tree websites are down while we upgrade to the latest
     code and features. Please pardon the inconvenience. We expect to have all
-    services restored soon (15 July, 2024).
+    services restored soon (26 July, 2025).
 
 </div>
