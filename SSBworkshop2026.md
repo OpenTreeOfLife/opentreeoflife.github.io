@@ -14,13 +14,13 @@ eventbrite:           # optional: alphanumeric key for Eventbrite registration, 
 permalink: /SSBworkshop2026/
 ---
 
-*We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
+*We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at <a href="https://carpentries.org/">https://carpentries.org/</a>*
 
 
 <h2 id="general">Open Tree of Life Workshop</h2>
 
 
-The (Open Tree of Life project)[tree.opentreeoflife.org] provides an integrated set of tools and data resources to make phylogenetic knowledge more accessible across the diversity of life. Participants will learn to use the Open Tree of Life tools and data stores to evaluate and unite phylogenetic inferences to generate taxonomically complete synthetic trees, which they can apply to their individual research questions in evolutionary biology. The focus of this workshop is demonstrating new features of the Open Tree of Life’s infrastructure: services for adding dates to nodes, constructing supertrees from arbitrary sets of trees, and performing generalized conflict analyses. While most of the services and tools demonstrated require only a browser to access, some will require access via a command line. The tools are accessible via Windows, Mac, or Linux devices.
+The <a href="tree.opentreeoflife.org">Open Tree of Life project</a> provides an integrated set of tools and data resources to make phylogenetic knowledge more accessible across the diversity of life. Participants will learn to use the Open Tree of Life tools and data stores to evaluate and unite phylogenetic inferences to generate taxonomically complete synthetic trees, which they can apply to their individual research questions in evolutionary biology. The focus of this workshop is demonstrating new features of the Open Tree of Life’s infrastructure: services for adding dates to nodes, constructing supertrees from arbitrary sets of trees, and performing generalized conflict analyses. While most of the services and tools demonstrated require only a browser to access, some will require access via a command line. The tools are accessible via Windows, Mac, or Linux devices.
 
 The workshop will cover using Open Tree of Life phylogenetic study curation tools to standardize the taxonomic names and metadata for published phylogenetic estimates. We will demonstrate tools to assess concordance and conflict across different phylogenetic estimates, and between phylogenetic estimates and taxonomic relationships. Using OpenTree’s custom synthesis tools, participants will generate synthetic summary trees for their taxa based on existing phylogenetic inferences. We will apply existing node date estimates to these synthetic trees, and infer date estimates for undated nodes in trees. Together these approaches will provide participants with the skill set to obtain a dated tree for taxa of interest and understand how published estimates disagree with each other with respect to those taxa.     
 
@@ -99,13 +99,13 @@ CODE OF CONDUCT
 <h2 id="code-of-conduct">Code of Conduct</h2>
 
 <p>
-Everyone who participates in SSB2023 is required to conform to the <a href="https://www.ib.unam.mx/ib/ssb2023/code-of-conduct/">Code of Conduct</a>.
+Everyone who participates in SSB2026 is required to conform to the <a href="https://www.systbio.org/code-of-ethics.html">SSB Code of Ethics</a>.
 </p>
 
 <h2 id="notes">Collaborative Notes Document</h2>
 
 <p>
-We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB">collaborative document</a> for chatting, taking notes, and sharing URLs and bits of code. Please sign in!
+We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB2026">collaborative document</a> for chatting, taking notes, and sharing URLs and bits of code. Please sign in!
 </p>
 <hr/>
 
