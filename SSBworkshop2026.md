@@ -118,7 +118,7 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB2026">coll
 <div class="row">
   <div class="col-md-6">
     <table class="table table-striped">
-    <tr> <td>1:30</td>  <td>Intro to OpenTree</td> </tr>
+    <tr> <td>1:30</td>  <td>Intro to OpenTree</td>. See <a href="https://github.com/McTavishLab/SSB2026/blob/main/OpenTreeTutorial.md">OpenTreeTutorial</a> for instructions and links.</tr>
     <tr> <td>2:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
     <tr> <td>2:30</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
     <tr> <td>3:30</td>  <td><a href="https://github.com/McTavishLab/jupyter_OpenTree_tutorials/blob/master/notebooks/DEMO_DatedTree.ipynb" target="_blank">Adding dates to synthesis trees</a></td></tr>
