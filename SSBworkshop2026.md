@@ -2,7 +2,7 @@
 title: Open Tree SSB2026
 layout: workshop      # DON'T CHANGE THIS.
 venue: "Open Tree of Life, LSU"        # brief name of host site without address (e.g., "Euphoric State University")
-address: ""      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
+address: "Louisiana Room of the Hilton in Baton Rouge"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 language: "en"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
 humandate: "Jan 09, 2026"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
@@ -118,11 +118,10 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB2026">coll
   <div class="col-md-6">
     <table class="table table-striped">
     <tr> <td>1:30</td>  <td>Intro to OpenTree</td> </tr>
-    <tr> <td>2:00</td>  <td>Conflict analyses</td></tr>
-    <tr> <td>2:30</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
-    <tr> <td>3:00</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
-    <tr> <td>4:00</td>  <td><a href="https://github.com/McTavishLab/jupyter_OpenTree_tutorials/blob/master/notebooks/DEMO_DatedTree.ipynb" target="_blank">Adding dates to synthesis trees</a></td></tr>
-    <tr> <td>1:00</td>  <td>END</td> </tr>
+    <tr> <td>2:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
+    <tr> <td>2:30</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
+    <tr> <td>3:30</td>  <td><a href="https://github.com/McTavishLab/jupyter_OpenTree_tutorials/blob/master/notebooks/DEMO_DatedTree.ipynb" target="_blank">Adding dates to synthesis trees</a></td></tr>
+    <tr> <td>5:00</td>  <td>END</td> </tr>
     </table>
   </div>
 </div>
