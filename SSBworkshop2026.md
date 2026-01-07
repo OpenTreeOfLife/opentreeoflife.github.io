@@ -19,6 +19,7 @@ permalink: /SSBworkshop2026/
 
 <h2 id="general">Open Tree of Life Workshop</h2>
 
+This workshop is a part of the <a href="https://ssb2026.github.io/">2026 SSB Breakout Meeting</a>.
 
 The <a href="tree.opentreeoflife.org">Open Tree of Life project</a> provides an integrated set of tools and data resources to make phylogenetic knowledge more accessible across the diversity of life. Participants will learn to use the Open Tree of Life tools and data stores to evaluate and unite phylogenetic inferences to generate taxonomically complete synthetic trees, which they can apply to their individual research questions in evolutionary biology. The focus of this workshop is demonstrating new features of the Open Tree of Life’s infrastructure: services for adding dates to nodes, constructing supertrees from arbitrary sets of trees, and performing generalized conflict analyses. While most of the services and tools demonstrated require only a browser to access, some will require access via a command line. The tools are accessible via Windows, Mac, or Linux devices.
 
