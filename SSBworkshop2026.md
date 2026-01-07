@@ -121,9 +121,6 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB2026">coll
     <tr> <td>1:30</td>  <td>Intro to OpenTree</td> </tr>
     <tr> <td>2:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
     <tr> <td>3:00</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
-    <tr> <td>1:30</td>  <td>Intro to OpenTree</td>. See <a href="https://github.com/McTavishLab/SSB2026/blob/main/OpenTreeTutorial.md">OpenTreeTutorial</a> for instructions and links.</tr>
-    <tr> <td>2:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
-    <tr> <td>2:30</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
     <tr> <td>3:30</td>  <td>Break</td></tr>
     <tr> <td>3:45</td>  <td><a href="https://github.com/McTavishLab/SSB2026/blob/main/OpenTreeTutorial.md" target="_blank">Downloading trees and adding dates</a></td></tr>
     <tr> <td>5:00</td>  <td>END</td> </tr>
