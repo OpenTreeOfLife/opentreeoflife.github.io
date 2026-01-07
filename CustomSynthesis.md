@@ -16,8 +16,7 @@ permalink: /CustomSynthesis/
 
 *We have borrowed the Carpentries website template and installation instructions. This is **not** a Carpentries workshop (although we highly recommend them!). Learn more about the carpentries at https://carpentries.org/*
 
-See <a target="_blank"  href="https://opentreeoflife.github.io/SSBworkshop2023/">https://opentreeoflife.github.io/SSBworkshop2023/</a> for the schedule of the full workshop.
-A video demo following these instructions is available at <a href="https://youtu.be/7LAGjowolmU" target="_blank">https://youtu.be/7LAGjowolmU</a>.
+
 
 <h2 id="general">The Open Tree of Life "synthetic tree"</h2>
 

@@ -2,7 +2,7 @@
 title: Open Tree SSB2026
 layout: workshop      # DON'T CHANGE THIS.
 venue: "Open Tree of Life, LSU"        # brief name of host site without address (e.g., "Euphoric State University")
-address: ""      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
+address: "Louisiana Room of the Hilton in Baton Rouge"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "us"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 language: "en"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
 humandate: "Jan 09, 2026"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
@@ -19,6 +19,7 @@ permalink: /SSBworkshop2026/
 
 <h2 id="general">Open Tree of Life Workshop</h2>
 
+This workshop is a part of the <a href="https://ssb2026.github.io/">2026 SSB Breakout Meeting</a>.
 
 The <a href="tree.opentreeoflife.org">Open Tree of Life project</a> provides an integrated set of tools and data resources to make phylogenetic knowledge more accessible across the diversity of life. Participants will learn to use the Open Tree of Life tools and data stores to evaluate and unite phylogenetic inferences to generate taxonomically complete synthetic trees, which they can apply to their individual research questions in evolutionary biology. The focus of this workshop is demonstrating new features of the Open Tree of Life’s infrastructure: services for adding dates to nodes, constructing supertrees from arbitrary sets of trees, and performing generalized conflict analyses. While most of the services and tools demonstrated require only a browser to access, some will require access via a command line. The tools are accessible via Windows, Mac, or Linux devices.
 
@@ -120,8 +121,11 @@ We will use this <a href="https://etherpad.wikimedia.org/p/OpenTreeSSB2026">coll
     <tr> <td>1:30</td>  <td>Intro to OpenTree</td> </tr>
     <tr> <td>2:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
     <tr> <td>3:00</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
-    <tr> <td>3:45</td>  <td>Break</td></tr>
-    <tr> <td>4:00</td>  <td><a href="https://github.com/McTavishLab/SSB2026/blob/main/OpenTreeTutorial.md" target="_blank">Comparing trees and adding dates</a></td></tr>
+    <tr> <td>1:30</td>  <td>Intro to OpenTree</td>. See <a href="https://github.com/McTavishLab/SSB2026/blob/main/OpenTreeTutorial.md">OpenTreeTutorial</a> for instructions and links.</tr>
+    <tr> <td>2:00</td>  <td><a href = "https://tree.opentreeoflife.org/curator">Adding trees to OpenTree</a></td></tr>
+    <tr> <td>2:30</td>  <td><a href="https://opentreeoflife.github.io/CustomSynthesis" target="_blank">Custom Supertree synthesis</a></td> </tr>
+    <tr> <td>3:30</td>  <td>Break</td></tr>
+    <tr> <td>3:45</td>  <td><a href="https://github.com/McTavishLab/SSB2026/blob/main/OpenTreeTutorial.md" target="_blank">Downloading trees and adding dates</a></td></tr>
     <tr> <td>5:00</td>  <td>END</td> </tr>
     </table>
   </div>
