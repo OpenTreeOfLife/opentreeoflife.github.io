@@ -145,7 +145,7 @@ please preview your site before committing, and make sure to run
 
 <p>
   To participate in this workshop,
-  you will need to be able to access Bash, Python3 and (optionally) Jupyter notebooks, and use git to clone repos.
+  you will need to be able to access Bash, Python3 and use git to clone repos.
   In addition, you will need an up-to-date web browser and a text editor.
 
   If you already have these software installed and accessible on your laptop, please skip to the bottom and run the checks.
@@ -174,15 +174,15 @@ You should be able to open a terminal window and run:
 </pre>
 
 This should print out some text that starts with "usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]"
-<h3 id="Jupyter check">Jupyter check</h3>
+<h3 id="Jupyter check">Python check</h3>
 
 <pre>
-    jupyter notebook
+    python3
 </pre>
 
-This should open up a browser window that says "jupyter" at the top. If you click on 'new' in the upper right, there should be an option to create a python3 notebook.
+This should open up Python showing a version number starting with 3 and a prompt starting with >>>
 
-(You can close this window and close the terminal.)  
+(You can use ctrl-D to exit python)  
 
   <br>
 If theses checks work, then you are all set!   
