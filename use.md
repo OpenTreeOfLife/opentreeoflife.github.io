@@ -7,6 +7,7 @@ permalink: /use
 # Workshops and Materials
 ## Most up to date tutorials
 
+[SSB 2026](https://opentreeoflife.github.io/SSBworkshop2026/)  
 
 ### Custom phylogenetic synthesis
 [Custom synthesis](https://opentreeoflife.github.io/CustomSynthesis/)  
